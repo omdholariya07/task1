@@ -121,7 +121,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
+            <a href="./create-user.php" class="nav-link">
             <i class="fa fa-user-plus" aria-hidden="true"></i>
               <p>
                 create User
@@ -141,7 +141,6 @@
             <i class='fas fa-file-csv'></i>
               <p>
              Export
-        
               </p>
             </a>
             
