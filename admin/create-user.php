@@ -97,7 +97,7 @@ include('config/dbcon.php');
             </div>
         </div>
     </div>
-
+    <!-- Content Header (Page Header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -114,49 +114,49 @@ include('config/dbcon.php');
                         <li class="breadcrumb-item active">Create users </li>
                     </ol>
                 </div><!-- /.col -->
-                <?php
-                    if (isset($_SESSION['status'])) 
-                    {
-                        echo "<h4>".$_SESSION['status']."</h4>";
-                        unset($_SESSION["status"]);
-                    }
-                    ?>
-                <!--<a href="#" data-toggle="modal" data-target="#AddUserModal"
-                    class="btn btn-primary float-sm-right"> Add User </a> -->
-
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddUserModal">
-                    Add User
-                </button>
 
             </div><!-- /.row -->
 
         </div><!-- /.container-fluid -->
 
     </div>
+
     <!-- /.content-header -->
-
-
-
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">DataTable with user data</h3>
-        </div>
-
-        <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>User Image</th>
-                        <th>Name of User</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Email Address</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
+    <section class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
                     <?php
+                    if (isset($_SESSION['status'])) 
+                    {
+                        echo "<h4>".$_SESSION['status']."</h4>";
+                        unset($_SESSION["status"]);
+                    }
+                    ?>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Registered User</h3>
+                            <a href="#" data-toggle="modal" data-target="#AddUserModal"
+                                class="btn btn-primary float-sm-right"> Add
+                                User </a>
+                        </div>
+                        <!-- /.card-header-->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>User Image</th>
+                                        <th>Name of User</th>
+                                        <th>City</th>
+                                        <th>State</th>
+                                        <th>Email Address</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
                     $query = "SELECT * FROM user";
                     $query_run = mysqli_query($conn, $query);
                     if(mysqli_num_rows($query_run) > 0)
@@ -165,36 +165,41 @@ include('config/dbcon.php');
                      {
                        // echo $row['firstname'];
                        ?>
-                    <tr>
-                        <td><?php echo $row['id']; ?></td>
-                        <td><?php echo $row['userimage']; ?></td>
-                        <td><?php echo $row['firstname']; ?></td>
-                        <td><?php echo $row['city']; ?></td>
-                        <td><?php echo $row['state']; ?></td>
-                        <td><?php echo $row['email']; ?></td>
-                        <td>
-                            <a href="crete-user-edit.php?user_id=<?php echo $row['id']; ?>" class="btn btn-info btn-sm">Edit</a>
-                            <a href="" class="btn btn-danger btn-sm">delete</a>
-                        </td>
-                    </tr>
-                    <?php
+                                    <tr>
+                                        <td><?php echo $row['id']; ?></td>
+                                        <td><?php echo $row['userimage']; ?></td>
+                                        <td><?php echo $row['firstname']; ?></td>
+                                        <td><?php echo $row['city']; ?></td>
+                                        <td><?php echo $row['state']; ?></td>
+                                        <td><?php echo $row['email']; ?></td>
+                                        <td>
+                                            <a href="create-user-edit.php?user_id=<?php echo $row['id']; ?>"
+                                                class="btn btn-info btn-sm">Edit</a>
+                                            <a href="" class="btn btn-danger btn-sm">delete</a>
+                                        </td>
+                                    </tr>
+                                    <?php
 
                      }
                     }
                     else
                     {
                      ?>
-                    <tr>
-                        <td>No record found</td>
-                    </tr>
-                    <?php
+                                    <tr>
+                                        <td>No record found</td>
+                                    </tr>
+                                    <?php
                     }
                     ?>
 
-                </tbody>
-            </table>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
 </div>
 

@@ -19,7 +19,7 @@ if(isset($_POST['addUser']))
    
    if($user_query_run)
    {
-    $_SESSION['status'] = "user add successfully";
+    $_SESSION['status'] = "user added successfully";
      header("Location: create-user.php");
    }
    else{
@@ -27,5 +27,28 @@ if(isset($_POST['addUser']))
     header("Location: create-user.php");
    }
 }
+if(isset($_POST["updateuser"]))
+{
+   $user_id = $_POST['user_id'];
+   $firstname = $_POST['firstname'];
+   $lastname= $_POST['lastname'];
+   $city = $_POST['city'];  
+   $state = $_POST['state'];
+   $email = $_POST['email'];
+   $userimage = $_POST['userimage'];
 
+   $query = "UPDATE user SET firstname='$firstname',lastname='$lastname',city='$city',state='$state',email='$email',userimage='$userimage' WHERE id='$user_id' ";
+   $query_run = mysqli_query($conn,$query);
+
+   if(query_run)
+   {
+    $_SESSION['status'] = "user updated successfully";
+     header("Location: create-user.php");
+   }
+   else{
+    $_SESSION['status'] = "user updating failed";
+    header("Location: create-user.php");
+   }
+
+}
 ?>
