@@ -3,6 +3,7 @@ session_start();
 include('includes/header.php');
 include('includes/topbar.php');
 include('includes/sidebar.php');
+include('config/dbcon.php');
 ?>
 
 
@@ -20,58 +21,58 @@ include('includes/sidebar.php');
                     </button>
                 </div>
                 <form action="code.php" method="POST">
-                <div class="modal-body">
                     <div class="modal-body">
-                      <div class="form-group">
-                            <label for="">first name*</label>
-                            <input type="text" name="firstname" class="form-control" placeholder="first Name">
-                        </div> 
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="">first name*</label>
+                                <input type="text" name="firstname" class="form-control" placeholder="first Name">
+                            </div>
 
-                        <div class="form-group">
-                            <label for="">last name*</label>
-                            <input type="text" name="lastname" class="form-control" placeholder="last Name">
-                        </div>
+                            <div class="form-group">
+                                <label for="">last name*</label>
+                                <input type="text" name="lastname" class="form-control" placeholder="last Name">
+                            </div>
 
-                     <!--   <div class="form-group">
+                            <!--   <div class="form-group">
                             <label for="">Address</label>
                             <textarea id="address" name="address" rows="4" cols="50">
 
                            </textarea>
                         </div> -->
 
-                        <div class="form-group">
-                            <label for="">city*</label>
-                            <input type="text"  name="city" class="form-control" placeholder="city">
-                        </div>
+                            <div class="form-group">
+                                <label for="">city*</label>
+                                <input type="text" name="city" class="form-control" placeholder="city">
+                            </div>
 
-                        <div class="form-group">
-                            <label for="">state*</label>
-                            <input type="text" name="state" class="form-control" placeholder="state">
-                        </div>
+                            <div class="form-group">
+                                <label for="">state*</label>
+                                <input type="text" name="state" class="form-control" placeholder="state">
+                            </div>
 
-                      <!--  <div class="form-group">
+                            <!--  <div class="form-group">
                             <label for="">Country*</label>
                            <select class="selectpicker countrypicker" data-flag="true" data-default="NO"></select> 
 
                         </div> -->
 
-                        <div class="form-group">
-                            <label for="">email*</label>
-                            <input type="email" name="email" class="form-control" placeholder="email">
-                        </div>
+                            <div class="form-group">
+                                <label for="">email*</label>
+                                <input type="email" name="email" class="form-control" placeholder="email">
+                            </div>
 
-                     <!--   <div class="form-group">
+                            <!--   <div class="form-group">
                             <label for="">Gender*</label>
                             <input type="text" class="form-control" placeholder="gender">
                         </div> -->
 
-                        <div class="form-group">
-                            <label for="">user image*</label>
-                            <input type="file" name="fileToUpload" id="fileToUpload">
-                            <input type="submit" value="Upload Image" name="submit">
-                        </div>
+                            <div class="form-group">
+                                <label for="">user image*</label>
+                                <input type="file" name="userimage" id="fileToUpload">
+                                <!-- <input type="submit" value="Upload Image" name="submit"> -->
+                            </div>
 
-                     <!--   <div class="form-group">
+                            <!--   <div class="form-group">
                             <label for="">Password*</label>
                             <input type="password" class="form-control" placeholder="password">
                         </div>
@@ -85,13 +86,13 @@ include('includes/sidebar.php');
                             <label for="">Date of birth</label>
                             <input type="date" class="form-control" placeholder="date of birth">
                         </div> -->
+                        </div>
                     </div>
-                </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" name="addUser" class="btn btn-primary">Save</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" name="addUser" class="btn btn-primary">Save</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -105,7 +106,7 @@ include('includes/sidebar.php');
                 </div><!-- /.col -->
 
                 <div class="col-sm-12">
-                    
+
                     <ol class="breadcrumb float-sm-right">
 
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -145,24 +146,51 @@ include('includes/sidebar.php');
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                     <tr>
+                        <th>Id</th>
                         <th>User Image</th>
                         <th>Name of User</th>
                         <th>City</th>
                         <th>State</th>
                         <th>Email Address</th>
-                        
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <?php
+                    $query = "SELECT * FROM user";
+                    $query_run = mysqli_query($conn, $query);
+                    if(mysqli_num_rows($query_run) > 0)
+                    {
+                     foreach($query_run as $row)
+                     {
+                       // echo $row['firstname'];
+                       ?>
                     <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                            Explorer 4.0
+                        <td><?php echo $row['id']; ?></td>
+                        <td><?php echo $row['userimage']; ?></td>
+                        <td><?php echo $row['firstname']; ?></td>
+                        <td><?php echo $row['city']; ?></td>
+                        <td><?php echo $row['state']; ?></td>
+                        <td><?php echo $row['email']; ?></td>
+                        <td>
+                            <a href="crete-user-edit.php?user_id=<?php echo $row['id']; ?>" class="btn btn-info btn-sm">Edit</a>
+                            <a href="" class="btn btn-danger btn-sm">delete</a>
                         </td>
-                        <td>Win 95+</td>
-                        <td> 4</td>
-                        <td>X</td>
                     </tr>
+                    <?php
+
+                     }
+                    }
+                    else
+                    {
+                     ?>
+                    <tr>
+                        <td>No record found</td>
+                    </tr>
+                    <?php
+                    }
+                    ?>
+
                 </tbody>
             </table>
         </div>
