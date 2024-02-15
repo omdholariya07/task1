@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('includes/header.php');
 include('includes/topbar.php');
 include('includes/sidebar.php');
@@ -18,76 +19,80 @@ include('includes/sidebar.php');
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <form action="code.php" method="POST">
                 <div class="modal-body">
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="">First Name*</label>
-                            <input type="text" class="form-control" placeholder="first Name">
-                        </div>
+                      <div class="form-group">
+                            <label for="">first name*</label>
+                            <input type="text" name="firstname" class="form-control" placeholder="first Name">
+                        </div> 
 
                         <div class="form-group">
-                            <label for="">Last Name*</label>
-                            <input type="text" class="form-control" placeholder="last Name">
+                            <label for="">last name*</label>
+                            <input type="text" name="lastname" class="form-control" placeholder="last Name">
                         </div>
 
-                        <div class="form-group">
+                     <!--   <div class="form-group">
                             <label for="">Address</label>
                             <textarea id="address" name="address" rows="4" cols="50">
 
                            </textarea>
+                        </div> -->
+
+                        <div class="form-group">
+                            <label for="">city*</label>
+                            <input type="text"  name="city" class="form-control" placeholder="city">
                         </div>
 
                         <div class="form-group">
-                            <label for="">City*</label>
-                            <input type="text" class="form-control" placeholder="city">
+                            <label for="">state*</label>
+                            <input type="text" name="state" class="form-control" placeholder="state">
                         </div>
 
-                        <div class="form-group">
-                            <label for="">State*</label>
-                            <input type="text" class="form-control" placeholder="state">
-                        </div>
-
-                        <div class="form-group">
+                      <!--  <div class="form-group">
                             <label for="">Country*</label>
                            <select class="selectpicker countrypicker" data-flag="true" data-default="NO"></select> 
-                        </div> 
+
+                        </div> -->
 
                         <div class="form-group">
-                            <label for="">Email*</label>
-                            <input type="text" class="form-control" placeholder="email">
+                            <label for="">email*</label>
+                            <input type="email" name="email" class="form-control" placeholder="email">
                         </div>
 
-                        <div class="form-group">
+                     <!--   <div class="form-group">
                             <label for="">Gender*</label>
                             <input type="text" class="form-control" placeholder="gender">
-                        </div>
+                        </div> -->
 
                         <div class="form-group">
-                            <label for="">User Image*</label>
+                            <label for="">user image*</label>
                             <input type="file" name="fileToUpload" id="fileToUpload">
                             <input type="submit" value="Upload Image" name="submit">
                         </div>
 
-                        <div class="form-group">
+                     <!--   <div class="form-group">
                             <label for="">Password*</label>
-                            <input type="text" class="form-control" placeholder="password">
+                            <input type="password" class="form-control" placeholder="password">
                         </div>
 
                         <div class="form-group">
                             <label for="">Confirm Password*</label>
-                            <input type="text" class="form-control" placeholder="confirm password">
+                            <input type="password" class="form-control" placeholder="confirm password">
                         </div>
 
                         <div class="form-group">
                             <label for="">Date of birth</label>
                             <input type="date" class="form-control" placeholder="date of birth">
-                        </div>
+                        </div> -->
                     </div>
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" name="addUser" class="btn btn-primary">Save</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -99,8 +104,8 @@ include('includes/sidebar.php');
                     <h1 class="m-0">Dashboard</h1>
                 </div><!-- /.col -->
 
-                <div class="col-sm-6">
-
+                <div class="col-sm-12">
+                    
                     <ol class="breadcrumb float-sm-right">
 
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -108,6 +113,13 @@ include('includes/sidebar.php');
                         <li class="breadcrumb-item active">Create users </li>
                     </ol>
                 </div><!-- /.col -->
+                <?php
+                    if (isset($_SESSION['status'])) 
+                    {
+                        echo "<h4>".$_SESSION['status']."</h4>";
+                        unset($_SESSION["status"]);
+                    }
+                    ?>
                 <!--<a href="#" data-toggle="modal" data-target="#AddUserModal"
                     class="btn btn-primary float-sm-right"> Add User </a> -->
 
@@ -138,6 +150,7 @@ include('includes/sidebar.php');
                         <th>City</th>
                         <th>State</th>
                         <th>Email Address</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
