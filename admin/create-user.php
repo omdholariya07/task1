@@ -25,12 +25,12 @@ include('config/dbcon.php');
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="">first name*</label>
-                                <input type="text" name="firstname" class="form-control" placeholder="first Name">
+                                <input type="text" name="firstname" class="form-control" placeholder="first Name" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="">last name*</label>
-                                <input type="text" name="lastname" class="form-control" placeholder="last Name">
+                                <input type="text" name="lastname" class="form-control" placeholder="last Name" required>
                             </div>
 
                             <!--   <div class="form-group">
@@ -42,12 +42,12 @@ include('config/dbcon.php');
 
                             <div class="form-group">
                                 <label for="">city*</label>
-                                <input type="text" name="city" class="form-control" placeholder="city">
+                                <input type="text" name="city" class="form-control" placeholder="city" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="">state*</label>
-                                <input type="text" name="state" class="form-control" placeholder="state">
+                                <input type="text" name="state" class="form-control" placeholder="state" required>
                             </div>
 
                             <!--  <div class="form-group">
@@ -58,7 +58,7 @@ include('config/dbcon.php');
 
                             <div class="form-group">
                                 <label for="">email*</label>
-                                <input type="email" name="email" class="form-control" placeholder="email">
+                                <input type="email" name="email" class="form-control" placeholder="email" required>
                             </div>
 
                             <!--   <div class="form-group">
@@ -66,26 +66,36 @@ include('config/dbcon.php');
                             <input type="text" class="form-control" placeholder="gender">
                         </div> -->
 
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">password*</label>
+                                        <input type="password" name="password" class="form-control" placeholder="password" required>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">confirm password*</label>
+                                        <input type="password" name="confirmpassword" class="form-control" placeholder="confirm password" required>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
                             <div class="form-group">
                                 <label for="">user image*</label>
-                                <input type="file" name="userimage" id="fileToUpload">
+                                <input type="file" name="userimage" id="fileToUpload" required>
                                 <!-- <input type="submit" value="Upload Image" name="submit"> -->
                             </div>
 
-                            <!--   <div class="form-group">
-                            <label for="">Password*</label>
-                            <input type="password" class="form-control" placeholder="password">
-                        </div>
 
-                        <div class="form-group">
-                            <label for="">Confirm Password*</label>
-                            <input type="password" class="form-control" placeholder="confirm password">
-                        </div>
 
-                        <div class="form-group">
-                            <label for="">Date of birth</label>
-                            <input type="date" class="form-control" placeholder="date of birth">
-                        </div> -->
+                            <!--  <div class="form-group">
+                                    <label for="">Date of birth</label>
+                                    <input type="date" class="form-control" placeholder="date of birth">
+                                </div> -->
                         </div>
                     </div>
 
@@ -238,14 +248,14 @@ include('config/dbcon.php');
 include('includes/script.php'); ?>
 <script>
 $(document).ready(function() {
-$('.deletebtn').click(function(e) {
-    e.preventDefault();
+    $('.deletebtn').click(function(e) {
+        e.preventDefault();
 
-    var user_id = $(this).val();
-    //console.log(user_id);
-    $('.delete_user_id').val(user_id);
-    $('#DeletModal').modal('show');
-});
+        var user_id = $(this).val();
+        //console.log(user_id);
+        $('.delete_user_id').val(user_id);
+        $('#DeletModal').modal('show');
+    });
 });
 </script>
 

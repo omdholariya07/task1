@@ -110,18 +110,19 @@ include('config/dbcon.php');
                             <input type="text" class="form-control" placeholder="gender">
                         </div> -->
 
+                           <div class="form-group">
+                            <label for="">Password*</label>
+                            <input type="password" name="password" class="form-control" placeholder="password">
+                        </div>
                             <div class="form-group">
                                 <label for="">user image*</label>
                                 <input type="file" name="userimage" value="<?php echo $row['userimage'] ?>"  id="fileToUpload">
                                 <!-- <input type="submit" value="Upload Image" name="submit"> -->
                             </div>
 
-                            <!--   <div class="form-group">
-                            <label for="">Password*</label>
-                            <input type="password" class="form-control" placeholder="password">
-                        </div>
+                          
 
-                        <div class="form-group">
+                       <!-- <div class="form-group">
                             <label for="">Confirm Password*</label>
                             <input type="password" class="form-control" placeholder="confirm password">
                         </div>
