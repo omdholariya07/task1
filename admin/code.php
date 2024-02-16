@@ -2,6 +2,25 @@
 session_start();
 include('config/dbcon.php');
 
+if(isset($_POST['check_Emailbtn']))
+{
+    $email = $_POST['email'];
+
+    $checkemail = "SELECT email FROM user WHERE email='$email'";
+    $checkemail_run = mysqli_query($conn, $checkemail);
+   // print_r($checkemail_run);
+   // exit();
+    if(mysqli_num_rows($checkemail_run) > 0)
+    {
+      echo "Email id already exists.!";
+    }
+    else
+    {
+        echo "It's Available";
+    }
+}
+
+
 if(isset($_POST['addUser']))
 {
    
@@ -17,21 +36,35 @@ if(isset($_POST['addUser']))
 
    if($password ==  $confirmpassword)
    {
- 
-    $user_query = "INSERT INTO `user` (`firstname`,`lastname`,`city`,`state`,`email`,`password`,`userimage`) VALUES ('$firstname','$lastname','$city','$state','$email','$password','$userimage')";
-   
-   $user_query_run = mysqli_query($conn,$user_query);
-   //print_r($user_query_run);
-   //exit();
-   if($user_query_run)
-   {
-    $_SESSION['status'] = "user added successfully";
+    $checkemail = "SELECT email FROM user WHERE email='$email'";
+    $checkemail_run = mysqli_query($conn, $checkemail);
+
+    if(mysqli_num_rows($checkemail_run) >0)
+    {
+      // already exit
+     $_SESSION['status'] = "Email id already exists.!";
      header("Location: create-user.php");
-   }
-   else{
-    $_SESSION['status'] = "user registration failed";
-    header("Location: create-user.php");
-   }    
+     exit;
+    }
+    else
+    {
+        // record not found
+        $user_query = "INSERT INTO `user` (`firstname`,`lastname`,`city`,`state`,`email`,`password`,`userimage`) VALUES ('$firstname','$lastname','$city','$state','$email','$password','$userimage')";
+   
+        $user_query_run = mysqli_query($conn,$user_query);
+        
+        if($user_query_run)
+        {
+         $_SESSION['status'] = "user added successfully";
+          header("Location: create-user.php");
+        }
+        else{
+         $_SESSION['status'] = "user registration failed";
+         header("Location: create-user.php");
+        }    
+    }
+
+   
 }
 else 
 {

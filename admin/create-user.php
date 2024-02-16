@@ -58,8 +58,10 @@ include('config/dbcon.php');
 
                             <div class="form-group">
                                 <label for="">email*</label>
-                                <input type="email" name="email" class="form-control" placeholder="email" required>
+                                <span class="email_error text-danger ml-2"></span>
+                                <input type="email" name="email" class="form-control email_id" placeholder="email" required>
                             </div>
+                             
 
                             <!--   <div class="form-group">
                             <label for="">Gender*</label>
@@ -86,7 +88,7 @@ include('config/dbcon.php');
 
                             <div class="form-group">
                                 <label for="">user image*</label>
-                                <input type="file" name="userimage" id="fileToUpload" required>
+                                <input type="file" name="userimage" id="fileToUpload" >
                                 <!-- <input type="submit" value="Upload Image" name="submit"> -->
                             </div>
 
@@ -246,6 +248,30 @@ include('config/dbcon.php');
 
 <?php
 include('includes/script.php'); ?>
+
+<script>
+$(document).ready(function() {
+
+    $('.email_id').keyup(function (e){
+    var email = $('.email_id').val();
+    //console.log(email);
+
+    $.ajax({
+     type: "POST",
+     url: "code.php",
+     data: {
+        'check_Emailbtn':1,
+        'email':email,
+     },
+     success: function (response){
+      //console.log(response);
+      $('.email_error').text(response);
+     }
+    });
+});
+});
+</script>
+
 <script>
 $(document).ready(function() {
     $('.deletebtn').click(function(e) {
