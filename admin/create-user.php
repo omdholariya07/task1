@@ -97,6 +97,34 @@ include('config/dbcon.php');
             </div>
         </div>
     </div>
+
+    <!-- delete User -->
+    <div class="modal fade" id="DeletModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="code.php" method="POST">
+                    <div class="modal-body">
+                        <input type="hidden" name="delete_id" class="delete_user_id">
+                        <p>
+                            Are you sure, you want to delete this data ?
+                        </p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" name="DeleteUserbtn" class="btn btn-primary">Yes, Delete.!</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Content Header (Page Header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -159,7 +187,7 @@ include('config/dbcon.php');
                                     <?php
                     $query = "SELECT * FROM user";
                     $query_run = mysqli_query($conn, $query);
-                    if(mysqli_num_rows($query_run) > 0)
+                    if(mysqli_num_rows($query_run) > 2)
                     {
                      foreach($query_run as $row)
                      {
@@ -168,14 +196,16 @@ include('config/dbcon.php');
                                     <tr>
                                         <td><?php echo $row['id']; ?></td>
                                         <td><?php echo $row['userimage']; ?></td>
-                                        <td><?php echo $row['firstname']; ?></td>
+                                        <td><?php echo $row['firstname']; ?>
+                                            <?php echo $row['lastname']; ?> </td>
                                         <td><?php echo $row['city']; ?></td>
                                         <td><?php echo $row['state']; ?></td>
                                         <td><?php echo $row['email']; ?></td>
                                         <td>
                                             <a href="create-user-edit.php?user_id=<?php echo $row['id']; ?>"
                                                 class="btn btn-info btn-sm">Edit</a>
-                                            <a href="" class="btn btn-danger btn-sm">delete</a>
+                                            <button type="button" value="<?php echo $row['id']; ?>"
+                                                class="btn btn-danger btn-sm deletebtn ">Delete</button>
                                         </td>
                                     </tr>
                                     <?php
@@ -204,7 +234,20 @@ include('config/dbcon.php');
 </div>
 
 
+<?php
+include('includes/script.php'); ?>
+<script>
+$(document).ready(function() {
+$('.deletebtn').click(function(e) {
+    e.preventDefault();
+
+    var user_id = $(this).val();
+    //console.log(user_id);
+    $('.delete_user_id').val(user_id);
+    $('#DeletModal').modal('show');
+});
+});
+</script>
 
 <?php
-include('includes/footer.php');
-?>
+include('includes/footer.php'); ?>

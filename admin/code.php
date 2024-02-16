@@ -27,7 +27,7 @@ if(isset($_POST['addUser']))
     header("Location: create-user.php");
    }
 }
-if(isset($_POST["updateuser"]))
+if(isset($_POST["updateUser"]))
 {
    $user_id = $_POST['user_id'];
    $firstname = $_POST['firstname'];
@@ -40,15 +40,33 @@ if(isset($_POST["updateuser"]))
    $query = "UPDATE user SET firstname='$firstname',lastname='$lastname',city='$city',state='$state',email='$email',userimage='$userimage' WHERE id='$user_id' ";
    $query_run = mysqli_query($conn,$query);
 
-   if(query_run)
+   if($query_run)
    {
-    $_SESSION['status'] = "user updated successfully";
+    $_SESSION['status'] = "user Updated successfully";
      header("Location: create-user.php");
    }
    else{
     $_SESSION['status'] = "user updating failed";
     header("Location: create-user.php");
    }
-
 }
+
+if(isset($_POST["DeleteUserbtn"]))
+{
+    $userid = $_POST["delete_id"];
+
+    $query = "DELETE FROM user WHERE id='$userid' ";
+    $query_run = mysqli_query($conn,$query);
+    
+    if($query_run)
+   {
+    $_SESSION['status'] = "user Deleted successfully";
+     header("Location: create-user.php");
+   }
+   else{
+    $_SESSION['status'] = "user deleting failed";
+    header("Location: create-user.php");
+   }
+}
+
 ?>

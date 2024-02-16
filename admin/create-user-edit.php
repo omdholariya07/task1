@@ -159,7 +159,8 @@ include('config/dbcon.php');
 </div>
 
 
-
 <?php
-include('includes/footer.php');
+ include('includes/script.php');
 ?>
+<?php
+include('includes/footer.php'); ?>
