@@ -57,8 +57,10 @@ include('config/dbcon.php');
                         {
                             $user_id = $_GET['user_id'];
                             $query = "SELECT * FROM user WHERE id='$user_id' LIMIT 1";
+                        
                             $query_run = mysqli_query($conn, $query);
-
+                            
+    
                             if(mysqli_num_rows($query_run) > 0)
                             {
                               foreach($query_run as $row)
@@ -67,12 +69,12 @@ include('config/dbcon.php');
                                 <input type="hidden" name="user_id" value="<?php echo $row['id'] ?>">
                                   <div class="form-group">
                                 <label for="">first name*</label>
-                                <input type="text" name="firstname" value="<?php echo $row['$firstname'] ?>" class="form-control" placeholder="first Name">
+                                <input type="text" name="firstname" value="<?php echo $row['firstname'] ?>" class="form-control" placeholder="first Name">
                             </div>
 
                             <div class="form-group">
                                 <label for="">last name*</label>
-                                <input type="text" name="lastname" value="<?php echo $row['$lastname'] ?>"  class="form-control" placeholder="last Name">
+                                <input type="text" name="lastname" value="<?php echo $row['lastname'] ?>"  class="form-control" placeholder="last Name">
                             </div>
 
                             <!--   <div class="form-group">
@@ -84,12 +86,12 @@ include('config/dbcon.php');
 
                             <div class="form-group">
                                 <label for="">city*</label>
-                                <input type="text" name="city" value="<?php echo $row['$city'] ?>"  class="form-control" placeholder="city">
+                                <input type="text" name="city" value="<?php echo $row['city'] ?>"  class="form-control" placeholder="city">
                             </div>
 
                             <div class="form-group">
                                 <label for="">state*</label>
-                                <input type="text" name="state" value="<?php echo $row['$state'] ?>"  class="form-control" placeholder="state">
+                                <input type="text" name="state" value="<?php echo $row['state'] ?>"  class="form-control" placeholder="state">
                             </div>
 
                             <!--  <div class="form-group">
@@ -100,7 +102,7 @@ include('config/dbcon.php');
 
                             <div class="form-group">
                                 <label for="">email*</label>
-                                <input type="email" name="email" value="<?php echo $row['$email'] ?>"  class="form-control" placeholder="email">
+                                <input type="email" name="email" value="<?php echo $row['email'] ?>"  class="form-control" placeholder="email">
                             </div>
 
                             <!--   <div class="form-group">
@@ -110,7 +112,7 @@ include('config/dbcon.php');
 
                             <div class="form-group">
                                 <label for="">user image*</label>
-                                <input type="file" name="userimage" value="<?php echo $row['$userimage'] ?>"  id="fileToUpload">
+                                <input type="file" name="userimage" value="<?php echo $row['userimage'] ?>"  id="fileToUpload">
                                 <!-- <input type="submit" value="Upload Image" name="submit"> -->
                             </div>
 
@@ -138,6 +140,7 @@ include('config/dbcon.php');
                                 echo "<h4>No Record Found.!</h4>";
                             }
                         }
+                       
                        
                         ?>
                            
