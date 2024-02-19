@@ -42,8 +42,37 @@ if(isset($_POST['addUser']))
    $email = $_POST['email'];
    $password = $_POST['password'];
    $confirmpassword = $_POST['confirmpassword'];
-   $userimage = $_POST['userimage'];
+   $userimage = $_FILES['userimage'];
    
+   $allowed_extension = array('png','jpg','jpeg');
+   $file_extension = pathinfo($userimage, PATHINFO_EXTENSION);
+
+   $filename = time().'.'.$file_extension;
+   if(!in_array($file_extension,$allowed_extension))
+   {
+      $_SESSION['status'] = "You are allowed with only jpg,png,jpeg image";
+      header('Location: create-user.php');
+      exit();
+   }
+   else
+   {
+     $query = "INSERT INTO `user` (`firstname`,`lastname`,`city`,`state`,`email`,`password`,`userimage`) VALUES ('$firstname','$lastname','$city','$state','$email','$password','$userimage','$filename')";
+     $query_run = mysqli_query($conn, $query);
+     if($query_run)
+     {
+        move_uploaded_file($_FILES['image']['tmp_name'],'uploads/product/'.$filename);
+        $_SESSION['status'] = "image added successfully";
+        header('Location: create-user.php');
+        exit();
+     }
+     else{
+        $_SESSION['status'] = "image something went wrong";
+        header('Location: create-user.php');
+        exit();
+     }
+   }
+
+
 
    if($password ==  $confirmpassword)
    {

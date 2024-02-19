@@ -1,3 +1,6 @@
+<!--<?php
+//print_r($_SESSION);
+ // exit(); ?> -->
  <!-- Navbar -->
  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
      <!-- Left navbar links -->
@@ -21,8 +24,11 @@
                      data-toggle="dropdown" aria-expanded="false">
                      <?php 
                      if(isset($_SESSION['auth']))
+
                      {
+                        
                        echo $_SESSION['auth_user']['user_firstname'];
+                       
                      }
                      else
                      {
