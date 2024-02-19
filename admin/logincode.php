@@ -13,17 +13,27 @@ if(isset($_POST['login']))
     if(mysqli_num_rows($login_query_run) > 0)
     {
      foreach($login_query_run as $row){
-        $user_id = $row["id"];
-        $user_name = $row["name"];
-        $user_email = $row["email"];
+        $user_id = $row['id'];
+        $user_firstname = $row['firstname'];
+       // $user_lastname = $row["lastname"];
+       // $user_city = $row["city"];
+       // $user_state = $row["state"];
+        $user_email = $row['email'];
+       // $user_userimage = $row["userimage"];
 
      }
+
      $_SESSION['auth'] = true;
      $_SESSION['auth_user'] = [
-       'user_id' =>$user_id,
-       'user_name' => $user_id,
-       'user_email' => $user_id,
+       'user_id'=>$user_id,
+      'user_firstname'=>$user_firstname,
+     //'user_lastname' => $user_lastname,
+     // 'user_city' => $user_city,
+      //'user_state' => $user_state,
+       'user_email'=>$user_email,
+       //'user_userimage' => $user_userimage
      ];
+
      $_SESSION['status'] = "Logged In Successfully";
      header('Location: index.php');
     }

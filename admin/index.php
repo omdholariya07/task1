@@ -1,7 +1,9 @@
 <?php
+include('authentication.php');
 include('includes/header.php');
 include('includes/topbar.php');
 include('includes/sidebar.php');
+//include('logincode.php');
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -101,6 +103,6 @@ include('includes/sidebar.php');
     </section>
 </div>  
 
-<?php
-include('includes/footer.php');?>
+<?php include('includes/script.php');?>
+<?php include('includes/footer.php');?>
 

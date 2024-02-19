@@ -1,5 +1,5 @@
 <?php
-session_start();
+include('authentication.php');
 include('includes/header.php');
 include('includes/topbar.php');
 include('includes/sidebar.php');
@@ -268,7 +268,7 @@ $(document).ready(function() {
       $('.email_error').text(response);
      }
     });
-});
+  });
 });
 </script>
 
