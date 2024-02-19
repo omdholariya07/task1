@@ -38,7 +38,7 @@ if(isset($_SESSION['auth']))
                         <div class="mb-md-5 mt-md-4 pb-5">
 
                             <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                            <p class="text-white-50 mb-5">Please enter your login and password!</p>
+                            <p class="text-white-50 mb-5">Please enter your email and password!</p>
 
                             <form action="logincode.php" method="POST">
                                 <div class="form-outline form-white mb-4">
