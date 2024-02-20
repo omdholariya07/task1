@@ -25,20 +25,22 @@ include('config/dbcon.php');
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="">first name*</label>
-                                <input type="text" name="firstname" class="form-control" placeholder="first Name" required>
+                                <input type="text" name="firstname" class="form-control" placeholder="first Name"
+                                    required>
                             </div>
 
                             <div class="form-group">
                                 <label for="">last name*</label>
-                                <input type="text" name="lastname" class="form-control" placeholder="last Name" required>
+                                <input type="text" name="lastname" class="form-control" placeholder="last Name"
+                                    required>
                             </div>
 
-                            <!--   <div class="form-group">
-                            <label for="">Address</label>
-                            <textarea id="address" name="address" rows="4" cols="50">
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <textarea id="address" name="address" rows="4" cols="50">
 
                            </textarea>
-                        </div> -->
+                            </div>
 
                             <div class="form-group">
                                 <label for="">city*</label>
@@ -51,17 +53,43 @@ include('config/dbcon.php');
                             </div>
 
                             <!--  <div class="form-group">
-                            <label for="">Country*</label>
-                           <select class="selectpicker countrypicker" data-flag="true" data-default="NO"></select> 
+                                <label for="">country*</label>
+                                <select name="country" value = "country" >  
+                                <option value="Wallis and Futana Islands">Wallis and Futuna Islands</option>
+                                <option value="Western Sahara">Western Sahara</option>
+                                <option value="Yemen">Yemen</option>
+                               
+                                </select >
 
-                        </div> -->
+                            </div>-->
+
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <select id="country" name="country" class="form-control" required>
+                                    <?php
+                                
+                                $countries = array("USA", "India", "UK", "Australia", "Germany");
+    
+                                  foreach ($countries as $country) {
+                                 echo '<option value="' . $country . '">' . $country . '</option>';
+                               }
+                                ?>
+                                </select>
+                            </div>
+
 
                             <div class="form-group">
                                 <label for="">email*</label>
                                 <span class="email_error text-danger ml-2"></span>
-                                <input type="email" name="email" class="form-control email_id" placeholder="email" required>
+                                <input type="email" name="email" class="form-control email_id" placeholder="email"
+                                    required>
                             </div>
-                             
+
+                            <div class="form-group">
+                                <label> gender* </label> <br>
+                                <input type="radio" name="gender" value="male" required> Male
+                                <input type="radio" name="gender" value="female" required> Female
+                            </div>
 
                             <!--   <div class="form-group">
                             <label for="">Gender*</label>
@@ -72,14 +100,16 @@ include('config/dbcon.php');
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">password*</label>
-                                        <input type="password" name="password" class="form-control" placeholder="password" required>
+                                        <input type="password" name="password" class="form-control"
+                                            placeholder="password" required>
                                     </div>
 
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">confirm password*</label>
-                                        <input type="password" name="confirmpassword" class="form-control" placeholder="confirm password" required>
+                                        <input type="password" name="confirmpassword" class="form-control"
+                                            placeholder="confirm password" required>
                                     </div>
 
                                 </div>
@@ -88,16 +118,17 @@ include('config/dbcon.php');
 
                             <div class="form-group">
                                 <label for="">user image*</label>
-                                <input type="file" name="userimage" id="fileToUpload" >
+                                <input type="file" name="userimage" id="fileToUpload">
                                 <!-- <input type="submit" value="Upload Image" name="submit"> -->
                             </div>
 
 
 
-                            <!--  <div class="form-group">
-                                    <label for="">Date of birth</label>
-                                    <input type="date" class="form-control" placeholder="date of birth">
-                                </div> -->
+                            <div class="form-group">
+                                <label for="Dob">Date of birth</label>
+                                <input type="date" class="form-control" name="Dob" id="Dob" placeholder="YYYY-MM-DD">
+                            </div>
+
                         </div>
                     </div>
 
@@ -252,23 +283,23 @@ include('includes/script.php'); ?>
 <script>
 $(document).ready(function() {
 
-    $('.email_id').keyup(function (e){
-    var email = $('.email_id').val();
-    //console.log(email);
+    $('.email_id').keyup(function(e) {
+        var email = $('.email_id').val();
+        //console.log(email);
 
-    $.ajax({
-     type: "POST",
-     url: "code.php",
-     data: {
-        'check_Emailbtn':1,
-        'email':email,
-     },
-     success: function (response){
-      //console.log(response);
-      $('.email_error').text(response);
-     }
+        $.ajax({
+            type: "POST",
+            url: "code.php",
+            data: {
+                'check_Emailbtn': 1,
+                'email': email,
+            },
+            success: function(response) {
+                //console.log(response);
+                $('.email_error').text(response);
+            }
+        });
     });
-  });
 });
 </script>
 

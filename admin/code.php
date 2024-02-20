@@ -35,45 +35,27 @@ if(isset($_POST['check_Emailbtn']))
 if(isset($_POST['addUser']))
 {
    
+     
    $firstname = $_POST['firstname'];
    $lastname= $_POST['lastname'];
+   $address= $_POST['address'];
    $city = $_POST['city'];  
    $state = $_POST['state'];
+   $country = $_POST['country'];
    $email = $_POST['email'];
+   $gender = $_POST['gender'];
    $password = $_POST['password'];
    $confirmpassword = $_POST['confirmpassword'];
-   $userimage = $_FILES['userimage'];
-   
-   $allowed_extension = array('png','jpg','jpeg');
-   $file_extension = pathinfo($userimage, PATHINFO_EXTENSION);
+   //$userimage = $_FILES['userimage'];
+   $userimage = $_POST['userimage'];
+   $Dateofbirth = $_POST['Dob'];
 
-   $filename = time().'.'.$file_extension;
-   if(!in_array($file_extension,$allowed_extension))
-   {
-      $_SESSION['status'] = "You are allowed with only jpg,png,jpeg image";
-      header('Location: create-user.php');
-      exit();
-   }
-   else
-   {
-     $query = "INSERT INTO `user` (`firstname`,`lastname`,`city`,`state`,`email`,`password`,`userimage`) VALUES ('$firstname','$lastname','$city','$state','$email','$password','$userimage','$filename')";
-     $query_run = mysqli_query($conn, $query);
-     if($query_run)
-     {
-        move_uploaded_file($_FILES['image']['tmp_name'],'uploads/product/'.$filename);
-        $_SESSION['status'] = "image added successfully";
-        header('Location: create-user.php');
-        exit();
-     }
-     else{
-        $_SESSION['status'] = "image something went wrong";
-        header('Location: create-user.php');
-        exit();
-     }
-   }
-
-
-
+   if (isset($_POST['Dob']) && !empty($_POST['Dob'])) {
+    $dob = date('Y-m-d', strtotime($_POST['Dob']));
+} else {
+    $dob = NULL;
+}
+  
    if($password ==  $confirmpassword)
    {
     $checkemail = "SELECT email FROM user WHERE email='$email'";
@@ -89,8 +71,11 @@ if(isset($_POST['addUser']))
     else
     {
         // record not found
-        $user_query = "INSERT INTO `user` (`firstname`,`lastname`,`city`,`state`,`email`,`password`,`userimage`) VALUES ('$firstname','$lastname','$city','$state','$email','$password','$userimage')";
-   
+        $user_query = "INSERT INTO `user` (`firstname`,`lastname`,`address`,`city`,`state`,`country`,`email`,`gender`,`password`,`userimage`,`Dob`) VALUES ('$firstname','$lastname','$address','$city','$state','$country','$email','$gender','$password','$userimage','$Dateofbirth')";
+        // echo "<pre>";print_r($_POST);
+        // print_r($user_query);
+        // echo "</pre>";
+        // exit();
         $user_query_run = mysqli_query($conn,$user_query);
         
         if($user_query_run)
@@ -118,12 +103,19 @@ if(isset($_POST["updateUser"]))
    $user_id = $_POST['user_id'];
    $firstname = $_POST['firstname'];
    $lastname= $_POST['lastname'];
+   $address= $_POST['address'];
    $city = $_POST['city'];  
    $state = $_POST['state'];
+   $country = $_POST['country'];
    $email = $_POST['email'];
+   $gender = $_POST['gender'];
+   //
    $userimage = $_POST['userimage'];
+   $Dateofbirth = $_POST['Dob'];
 
-   $query = "UPDATE user SET firstname='$firstname',lastname='$lastname',city='$city',state='$state',email='$email',userimage='$userimage' WHERE id='$user_id' ";
+   $query = "UPDATE user SET firstname='$firstname',lastname='$lastname',address='$address',city='$city',state='$state',country='$country',email='$email',gender='$gender',userimage='$userimage',Dob='$Dateofbirth' WHERE id='$user_id' ";
+  //print_r($query);
+ // exit();
    $query_run = mysqli_query($conn,$query);
 
    if($query_run)
