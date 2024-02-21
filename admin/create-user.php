@@ -118,7 +118,7 @@ include('config/dbcon.php');
 
                             <div class="form-group">
                                 <label for="">user image*</label>
-                                <input type="file" name="userimage" id="fileToUpload">
+                                <input type="file" name="userimage" id="userimage">
                                 <!-- <input type="submit" value="Upload Image" name="submit"> -->
                             </div>
 
@@ -238,7 +238,7 @@ include('config/dbcon.php');
                        ?>
                                     <tr>
                                         <td><?php echo $row['id']; ?></td>
-                                        <td><?php echo $row['userimage']; ?></td>
+                                       <?php echo '<td><img src="' . $row['userimage'] . '" alt="User Image" style="width:50px;height:50px;"></td>';?>
                                         <td><?php echo $row['firstname']; ?>
                                             <?php echo $row['lastname']; ?> </td>
                                         <td><?php echo $row['city']; ?></td>
@@ -306,16 +306,16 @@ $(document).ready(function() {
 </script>
 
 <script>
-$(document).ready(function() {
+    $(document).ready(function() {
+    });
     $('.deletebtn').click(function(e) {
-        e.preventDefault();
+                e.preventDefault();
 
         var user_id = $(this).val();
         //console.log(user_id);
         $('.delete_user_id').val(user_id);
         $('#DeletModal').modal('show');
     });
-});
 </script>
 
 <script>
@@ -329,12 +329,13 @@ $(function() {
 
 <script>
 $(document).ready(function() {
+});
     // Initialize Select2
     $('#stateSelect').select2({
         placeholder: "Select a state",
         allowClear: true
     });
-});
+
 </script>
 
 <?php include('includes/footer.php'); ?>

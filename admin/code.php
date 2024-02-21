@@ -1,4 +1,5 @@
 <?php
+
 include('authentication.php');
 include('config/dbcon.php');
 
@@ -35,7 +36,6 @@ if(isset($_POST['check_Emailbtn']))
 if(isset($_POST['addUser']))
 {
    
-     
    $firstname = $_POST['firstname'];
    $lastname= $_POST['lastname'];
    $address= $_POST['address'];
@@ -46,18 +46,12 @@ if(isset($_POST['addUser']))
    $gender = $_POST['gender'];
    $password = $_POST['password'];
    $confirmpassword = $_POST['confirmpassword'];
-   //$userimage = $_FILES['userimage'];
-   $userimage = $_POST['userimage'];
+   $userimage = $_FILES['userimage']['name'];
+ //  $userimage = $_POST['userimage'];
    $Dateofbirth = $_POST['Dob'];
   
-   if (!empty($_POST['Dob'])) {
-    $Dateofbirth = $_POST['Dob'];
-}
-else {
+   
 
-    $Dateofbirth = NULL;
-    
-}    
 
    if($password ==  $confirmpassword)
    {
@@ -74,16 +68,44 @@ else {
     }
     else
     {
+         
         // record not found
-        $user_query = "INSERT INTO `user` (`firstname`,`lastname`,`address`,`city`,`state`,`country`,`email`,`gender`,`password`,`userimage`,`Dob`) VALUES ('$firstname','$lastname','$address','$city','$state','$country','$email','$gender','$password','$userimage','$Dateofbirth')";
+      
         // echo "<pre>";print_r($_POST);
         // print_r($user_query);
         // echo "</pre>";
         // exit();
-        $user_query_run = mysqli_query($conn,$user_query);
+        // 
         
-        if($user_query_run)
-        {
+        if (isset($_POST['addUser'])) {    
+            
+            if(isset($_FILES['userimage']) && $_FILES['userimage']['error'] === UPLOAD_ERR_OK) {
+                $uploadDir = 'uploads/product/'; 
+                $uploadFile = $uploadDir . basename($_FILES['userimage']['name']);
+            
+                if(move_uploaded_file($_FILES['userimage']['tmp_name'], $uploadFile)) {
+                   
+                    $userimage = $uploadFile;
+                } else {
+                    
+                    echo 'Image upload failed.';
+                    
+                }
+               }
+
+            if (!empty($_POST['Dob'])) {
+                $Dateofbirth = $_POST['Dob'];
+               }
+               else {
+            
+                $Dateofbirth = NULL;
+               }
+           
+
+               $user_query = "INSERT INTO `user` (`firstname`,`lastname`,`address`,`city`,`state`,`country`,`email`,`gender`,`password`,`userimage`,`Dob`) VALUES ('$firstname','$lastname','$address','$city','$state','$country','$email','$gender','$password','$userimage','$Dateofbirth')";
+
+               $user_query_run = mysqli_query($conn,$user_query);
+
          $_SESSION['status'] = "user added successfully";
           header("Location: create-user.php");
         }

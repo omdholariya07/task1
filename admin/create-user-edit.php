@@ -151,7 +151,7 @@ include('config/dbcon.php');
                                             <div class="form-group">
                                                 <label for="">user image*</label>
                                                 <input type="file" name="userimage"
-                                                    value="<?php echo $row['userimage'] ?>" id="fileToUpload">
+                                                    value="<?php echo $row['userimage'] ?>" id="userimage">
                                                 <!-- <input type="submit" value="Upload Image" name="submit"> -->
                                             </div>
 
