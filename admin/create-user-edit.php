@@ -81,12 +81,6 @@ include('config/dbcon.php');
                                                     placeholder="last Name">
                                             </div>
 
-                                            <!--  <div class="form-group">
-                            <label for="">Address</label>
-                            <textarea id="address" name="address" <?php echo $row['address'] ?> rows="4" cols="50">
-
-                           </textarea>
-                        </div> -->
                                             <div class="form-group">
                                                 <label for="address">Address</label>
                                                 <textarea id="address" name="address" rows="4"
@@ -100,25 +94,20 @@ include('config/dbcon.php');
                                                     class="form-control" placeholder="city">
                                             </div>
 
+                                           
                                             <div class="form-group">
                                                 <label for="">state*</label>
-                                                <input type="text" name="state" value="<?php echo $row['state'] ?>"
-                                                    class="form-control" placeholder="state">
+                                                <select id="stateSelect" name="state" class="state-select"
+                                                    style="width: 100%">
+                                                    <?php        
+                                                $states = ["New York", "California", "Texas", "Florida", "Illinois"];
+                                                foreach ($states as $state) {
+                                                $value = str_replace(' ', '', $state);
+                                                echo '<option value="' . $value . '">' . $state . '</option>';
+                                                }
+                                                ?>
+                                                </select>
                                             </div>
-
-                                            <!--  <div class="form-group">
-                              <label for="">country*</label>
-                                <select name="country" value="country" <?php echo $row['country'] == "country" ? "selected" : ""; ?>>  
-                                <option value="Wallis and Futana Islands">Wallis and Futuna Islands</option>
-                                <option value="Western Sahara">Western Sahara</option>
-                                <option value="Yemen">Yemen</option>
-                               
-                                </select >
-
-                            </div>-->
-
-
-
 
 
 
@@ -126,12 +115,12 @@ include('config/dbcon.php');
                                                 <label for="country">Country</label>
                                                 <select id="country" name="country" class="form-control" required>
                                                     <?php
-                                     $countries = array("USA", "India", "UK", "Australia", "Germany");
-                                      foreach ($countries as $country) {
-                                       $selected = ($row['country'] == $country) ? 'selected' : '';
-                                  echo '<option value="' . $country . '" ' . $selected . '>' . $country . '</option>';
-                                  }
-?>
+                                                $countries = array("USA", "India", "UK", "Australia", "Germany");
+                                                 foreach ($countries as $country) {
+                                                 $selected = ($row['country'] == $country) ? 'selected' : '';
+                                                 echo '<option value="' . $country . '" ' . $selected . '>' . $country . '</option>';
+                                              }
+                                                ?>
                                                 </select>
                                             </div>
 
@@ -169,18 +158,12 @@ include('config/dbcon.php');
 
 
 
-                                            <!-- <div class="form-group">
-                            <label for="">Date of birth</label>
-                            <input type="date" class="form-control" name="Dob" value="<?php echo $row['Dob'] ?>" >
-                        </div> -->
+
                                             <div class="form-group">
                                                 <label for="Dob">Date of birth</label>
-                                                <input type="date" class="form-control" name="Dob" id="Dob"
-                                                    placeholder="YYYY-MM-DD"
-                                                    value="<?php echo $row['Dob'] ? date('Y-m-d', strtotime($row['Dob'])) : '';
-                                                    ?>">
+                                                <input type="text" name="Dob" id="my_date_picker"
+                                                    value="<?php echo $row['Dob'] ?>">
                                             </div>
-
 
 
                                         </div>
@@ -214,5 +197,24 @@ include('config/dbcon.php');
 <?php
  include('includes/script.php');
 ?>
+<script>
+$(function() {
+    $("#my_date_picker").datepicker({
+        dateFormat: 'yy-mm-dd',
+        defaultDate: "2019-09-24"
+    });
+});
+</script>
+
+<script>
+$(document).ready(function() {
+    // Initialize Select2
+    $('#stateSelect').select2({
+        placeholder: "Select a state",
+        allowClear: true
+    });
+});
+</script>
+
 <?php
 include('includes/footer.php'); ?>

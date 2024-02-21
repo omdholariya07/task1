@@ -49,15 +49,19 @@ if(isset($_POST['addUser']))
    //$userimage = $_FILES['userimage'];
    $userimage = $_POST['userimage'];
    $Dateofbirth = $_POST['Dob'];
-
-   if (isset($_POST['Dob']) && !empty($_POST['Dob'])) {
-    $dob = date('Y-m-d', strtotime($_POST['Dob']));
-} else {
-    $dob = NULL;
-}
   
+   if (!empty($_POST['Dob'])) {
+    $Dateofbirth = $_POST['Dob'];
+}
+else {
+
+    $Dateofbirth = NULL;
+    
+}    
+
    if($password ==  $confirmpassword)
    {
+    
     $checkemail = "SELECT email FROM user WHERE email='$email'";
     $checkemail_run = mysqli_query($conn, $checkemail);
 
@@ -87,8 +91,8 @@ if(isset($_POST['addUser']))
          $_SESSION['status'] = "user registration failed";
          header("Location: create-user.php");
         }    
+        
     }
-
    
 }
 else 
@@ -96,6 +100,7 @@ else
     $_SESSION['status'] = "Password and Confirm Password does not match";
     header("Location: create-user.php");
 }
+
    }
    
 if(isset($_POST["updateUser"]))
