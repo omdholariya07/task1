@@ -50,7 +50,7 @@ include('config/dbcon.php');
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <form action="code.php" method="POST">
+                                    <form action="code.php" method="POST" enctype="multipart/form-data">
                                         <div class="modal-body">
                                             <?php
                         if(isset($_GET['user_id']))
@@ -94,7 +94,7 @@ include('config/dbcon.php');
                                                     class="form-control" placeholder="city">
                                             </div>
 
-                                           
+
                                             <div class="form-group">
                                                 <label for="">state*</label>
                                                 <select id="stateSelect" name="state" class="state-select"
@@ -148,12 +148,23 @@ include('config/dbcon.php');
                                                 <input type="password" name="password" class="form-control"
                                                     placeholder="password">
                                             </div>
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label for="">user image*</label>
                                                 <input type="file" name="userimage"
-                                                    value="<?php echo $row['userimage'] ?>" id="userimage">
-                                                <!-- <input type="submit" value="Upload Image" name="submit"> -->
+                                                   id="userimage" accept="image/*">
+                                              >
+                                            </div> -->
+
+                                            <div class="form-group" >
+                                                <label for="userimage">User Image*</label>
+                                                <input type="file" name="userimage" >
+                                                
+                                                <?php if (!empty($row['userimage'])) : ?>
+                                                <img src="<?php echo $row['userimage']; ?>" alt="Current User Image"
+                                                    style="width: 50px; height: 50px;">
+                                                <?php endif; ?>
                                             </div>
+
 
 
 

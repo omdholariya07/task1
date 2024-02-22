@@ -20,7 +20,7 @@ include('config/dbcon.php');
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="code.php" method="POST">
+                <form action="code.php" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="modal-body">
                             <div class="form-group">
@@ -118,8 +118,8 @@ include('config/dbcon.php');
 
                             <div class="form-group">
                                 <label for="">user image*</label>
-                                <input type="file" name="userimage" id="userimage">
-                                <!-- <input type="submit" value="Upload Image" name="submit"> -->
+                                <input type="file" name="userimage" >
+                               
                             </div>
 
 
@@ -238,7 +238,7 @@ include('config/dbcon.php');
                        ?>
                                     <tr>
                                         <td><?php echo $row['id']; ?></td>
-                                       <?php echo '<td><img src="' . $row['userimage'] . '" alt="User Image" style="width:50px;height:50px;"></td>';?>
+                                      <?php  echo '<td><img src="' . $row['userimage'] . '" alt="User Image" style="width:50px;height:50px;"></td>';?>
                                         <td><?php echo $row['firstname']; ?>
                                             <?php echo $row['lastname']; ?> </td>
                                         <td><?php echo $row['city']; ?></td>

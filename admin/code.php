@@ -35,7 +35,7 @@ if(isset($_POST['check_Emailbtn']))
 
 if(isset($_POST['addUser']))
 {
-   
+  
    $firstname = $_POST['firstname'];
    $lastname= $_POST['lastname'];
    $address= $_POST['address'];
@@ -46,10 +46,33 @@ if(isset($_POST['addUser']))
    $gender = $_POST['gender'];
    $password = $_POST['password'];
    $confirmpassword = $_POST['confirmpassword'];
-   $userimage = $_FILES['userimage']['name'];
+  
+   
+ //  $folder = 'images/'.$filename;
+  // move_uploaded_file($tempname, $folder);
+
+  if(isset($_FILES['userimage'])){
+    //   echo "<pre>";
+    //   print_r($_FILES);
+    //   echo "<pre>";
+    //   exit();
+
+   $filename = $_FILES['userimage']['name'];
+   $filesize = $_FILES['userimage']['size'];
+   $tempname = $_FILES['userimage']['tmp_name'];
+   $filetype = $_FILES['userimage']['type'];
+
+   $folder = 'upload/'.$filename;
+   move_uploaded_file($tempname, $folder);
+ 
+  }
+  
+ 
  //  $userimage = $_POST['userimage'];
    $Dateofbirth = $_POST['Dob'];
+   //$Dateofbirth = isset($_POST['Dob']) ? $_POST['Dob'] : NULL;
   
+   
    
 
 
@@ -69,7 +92,7 @@ if(isset($_POST['addUser']))
     else
     {
          
-        // record not found
+        echo " record not found ";
       
         // echo "<pre>";print_r($_POST);
         // print_r($user_query);
@@ -78,31 +101,28 @@ if(isset($_POST['addUser']))
         // 
         
         if (isset($_POST['addUser'])) {    
-            
-            if(isset($_FILES['userimage']) && $_FILES['userimage']['error'] === UPLOAD_ERR_OK) {
-                $uploadDir = 'uploads/product/'; 
-                $uploadFile = $uploadDir . basename($_FILES['userimage']['name']);
-            
-                if(move_uploaded_file($_FILES['userimage']['tmp_name'], $uploadFile)) {
-                   
-                    $userimage = $uploadFile;
-                } else {
-                    
-                    echo 'Image upload failed.';
-                    
-                }
-               }
 
-            if (!empty($_POST['Dob'])) {
+           if (!empty($Dateofbirth)) {
                 $Dateofbirth = $_POST['Dob'];
-               }
-               else {
-            
-                $Dateofbirth = NULL;
-               }
-           
+           }
 
-               $user_query = "INSERT INTO `user` (`firstname`,`lastname`,`address`,`city`,`state`,`country`,`email`,`gender`,`password`,`userimage`,`Dob`) VALUES ('$firstname','$lastname','$address','$city','$state','$country','$email','$gender','$password','$userimage','$Dateofbirth')";
+          //  $userimage = $_FILES['userimage']['name'];
+           // if(isset($_FILES['userimage']['name']) && $_FILES['userimage']['error'] === UPLOAD_ERR_OK) {
+              //  $folder = 'images/'.$userimage; 
+              //  $uploadFile = $folder . basename($_FILES['userimage']['name']);
+                // echo $folder;
+                //if(move_uploaded_file($tempname, $folder)) {
+                //   echo "<img src='$folder'height='100px' width='100px'>";
+                  //  $userimage = $uploadFile;
+                //} else {
+                    
+                  //  echo 'Image upload failed.';
+                    
+             //   }
+         //   }
+                
+            
+               $user_query = "INSERT INTO `user` (`firstname`,`lastname`,`address`,`city`,`state`,`country`,`email`,`gender`,`password`,`userimage`,`Dob`) VALUES ('$firstname','$lastname','$address','$city','$state','$country','$email','$gender','$password','$folder','$Dateofbirth')";
 
                $user_query_run = mysqli_query($conn,$user_query);
 
@@ -137,10 +157,26 @@ if(isset($_POST["updateUser"]))
    $email = $_POST['email'];
    $gender = $_POST['gender'];
    //
-   $userimage = $_POST['userimage'];
+  
    $Dateofbirth = $_POST['Dob'];
 
-   $query = "UPDATE user SET firstname='$firstname',lastname='$lastname',address='$address',city='$city',state='$state',country='$country',email='$email',gender='$gender',userimage='$userimage',Dob='$Dateofbirth' WHERE id='$user_id' ";
+   if(isset($_FILES['userimage'])){
+    //   echo "<pre>";
+    //   print_r($_FILES);
+    //   echo "<pre>";
+    //   exit();
+
+   $filename = $_FILES['userimage']['name'];
+   $filesize = $_FILES['userimage']['size'];
+   $tempname = $_FILES['userimage']['tmp_name'];
+   $filetype = $_FILES['userimage']['type'];
+
+   $folder = 'upload/'.$filename;
+   move_uploaded_file($tempname, $folder);
+ 
+  }
+
+   $query = "UPDATE user SET firstname='$firstname',lastname='$lastname',address='$address',city='$city',state='$state',country='$country',email='$email',gender='$gender',userimage='$folder',Dob='$Dateofbirth' WHERE id='$user_id' ";
   //print_r($query);
  // exit();
    $query_run = mysqli_query($conn,$query);
