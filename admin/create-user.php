@@ -11,7 +11,7 @@ include('config/dbcon.php');
 <div class="content-wrapper">
 
     <!-- Modal -->
-    <div class="modal fade" id="AddUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!--  <div class="modal fade" id="AddUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -19,7 +19,30 @@ include('config/dbcon.php');
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                </div>
+                </div> -->
+            <!-- Content Header (Page Header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Dashboard</h1>
+                </div><!-- /.col -->
+
+                <div class="col-sm-12">
+
+                    <ol class="breadcrumb float-sm-right">
+
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+
+                        <li class="breadcrumb-item active">Create users </li>
+                    </ol>
+                </div><!-- /.col -->
+
+            </div><!-- /.row -->
+
+        </div><!-- /.container-fluid -->
+
+    </div>    
                 <form action="code.php" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="modal-body">
@@ -91,11 +114,7 @@ include('config/dbcon.php');
                                 <input type="radio" name="gender" value="female" required> Female
                             </div>
 
-                            <!--   <div class="form-group">
-                            <label for="">Gender*</label>
-                            <input type="text" class="form-control" placeholder="gender">
-                        </div> -->
-
+                            
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -133,15 +152,15 @@ include('config/dbcon.php');
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" name="addUser" class="btn btn-primary">Save</button>
+                     <!--   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                       <button type="submit" name="addUser" class="btn btn-primary">Save</button> 
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- delete User -->
+   <!-- delete User 
     <div class="modal fade" id="DeletModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -157,122 +176,20 @@ include('config/dbcon.php');
                         <p>
                             Are you sure, you want to delete this data ?
                         </p>
-                    </div>
+                    </div> 
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" name="DeleteUserbtn" class="btn btn-primary">Yes, Delete.!</button>
-                    </div>
+                    </div> 
                 </form>
             </div>
         </div>
-    </div>
+    </div> --> 
 
-    <!-- Content Header (Page Header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Dashboard</h1>
-                </div><!-- /.col -->
+    
 
-                <div class="col-sm-12">
-
-                    <ol class="breadcrumb float-sm-right">
-
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-
-                        <li class="breadcrumb-item active">Create users </li>
-                    </ol>
-                </div><!-- /.col -->
-
-            </div><!-- /.row -->
-
-        </div><!-- /.container-fluid -->
-
-    </div>
-
-    <!-- /.content-header -->
-    <section class="content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <?php
-                    if (isset($_SESSION['status'])) 
-                    {
-                        echo "<h4>".$_SESSION['status']."</h4>";
-                        unset($_SESSION["status"]);
-                    }
-                    ?>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Registered User</h3>
-                            <a href="#" data-toggle="modal" data-target="#AddUserModal"
-                                class="btn btn-primary float-sm-right"> Add
-                                User </a>
-                        </div>
-                        <!-- /.card-header-->
-                        <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>User Image</th>
-                                        <th>Name of User</th>
-                                        <th>City</th>
-                                        <th>State</th>
-                                        <th>Email Address</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                    $query = "SELECT * FROM user";
-                    $query_run = mysqli_query($conn, $query);
-                    if(mysqli_num_rows($query_run) > 2)
-                    {
-                     foreach($query_run as $row)
-                     {
-                       // echo $row['firstname'];
-                       ?>
-                                    <tr>
-                                        <td><?php echo $row['id']; ?></td>
-                                      <?php  echo '<td><img src="' . $row['userimage'] . '" alt="User Image" style="width:50px;height:50px;"></td>';?>
-                                        <td><?php echo $row['firstname']; ?>
-                                            <?php echo $row['lastname']; ?> </td>
-                                        <td><?php echo $row['city']; ?></td>
-                                        <td><?php echo $row['state']; ?></td>
-                                        <td><?php echo $row['email']; ?></td>
-                                        <td>
-                                            <a href="create-user-edit.php?user_id=<?php echo $row['id']; ?>"
-                                                class="btn btn-info btn-sm">Edit</a>
-                                            <button type="button" value="<?php echo $row['id']; ?>"
-                                                class="btn btn-danger btn-sm deletebtn ">Delete</button>
-                                        </td>
-                                    </tr>
-                                    <?php
-
-                     }
-                    }
-                    else
-                    {
-                     ?>
-                                    <tr>
-                                        <td>No record found</td>
-                                    </tr>
-                                    <?php
-                    }
-                    ?>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  
 
 </div>
 
@@ -280,7 +197,18 @@ include('config/dbcon.php');
 <?php
 include('includes/script.php'); ?>
 
+<script>
+    $(document).ready(function() {
+    });
+    $('.deletebtn').click(function(e) {
+                e.preventDefault();
 
+        var user_id = $(this).val();
+        //console.log(user_id);
+        $('.delete_user_id').val(user_id);
+        $('#DeletModal').modal('show');
+    });
+</script>
 
 <script>
 $(document).ready(function() {
@@ -305,18 +233,6 @@ $(document).ready(function() {
 });
 </script>
 
-<script>
-    $(document).ready(function() {
-    });
-    $('.deletebtn').click(function(e) {
-                e.preventDefault();
-
-        var user_id = $(this).val();
-        //console.log(user_id);
-        $('.delete_user_id').val(user_id);
-        $('#DeletModal').modal('show');
-    });
-</script>
 
 <script>
 $(function() {

@@ -44,7 +44,7 @@ include('config/dbcon.php');
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Edit - Registered User</h3>
-                            <a href="create-user.php" class="btn btn-danger float-sm-right"> BACK </a>
+                            <a href="datatable.php" class="btn btn-danger float-sm-right"> BACK </a>
                         </div>
                         <!-- /.card-header-->
                         <div class="card-body">
@@ -148,26 +148,17 @@ include('config/dbcon.php');
                                                 <input type="password" name="password" class="form-control"
                                                     placeholder="password">
                                             </div>
-                                            <!-- <div class="form-group">
-                                                <label for="">user image*</label>
-                                                <input type="file" name="userimage"
-                                                   id="userimage" accept="image/*">
-                                              >
-                                            </div> -->
+                                            
 
-                                            <div class="form-group" >
+                                            <div class="form-group">
                                                 <label for="userimage">User Image*</label>
-                                                <input type="file" name="userimage" >
-                                                
+                                                <input type="file" name="userimage">
+
                                                 <?php if (!empty($row['userimage'])) : ?>
                                                 <img src="<?php echo $row['userimage']; ?>" alt="Current User Image"
                                                     style="width: 50px; height: 50px;">
                                                 <?php endif; ?>
                                             </div>
-
-
-
-
 
 
                                             <div class="form-group">
@@ -189,18 +180,22 @@ include('config/dbcon.php');
                        
                        
                         ?>
+                                       
 
-                                        <div class="modal-footer">
-                                            <button type="submit" name="updateUser" class="btn btn-info">Update</button>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" name="updateUser"
+                                                                    class="btn btn-info">Update</button>
+                                                            </div>
+
+                                                            </div>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
     </section>
 </div>
 
@@ -226,6 +221,7 @@ $(document).ready(function() {
     });
 });
 </script>
+
 
 <?php
 include('includes/footer.php'); ?>

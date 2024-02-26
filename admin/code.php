@@ -127,11 +127,11 @@ if(isset($_POST['addUser']))
                $user_query_run = mysqli_query($conn,$user_query);
 
          $_SESSION['status'] = "user added successfully";
-          header("Location: create-user.php");
+          header("Location: datatable.php");
         }
         else{
          $_SESSION['status'] = "user registration failed";
-         header("Location: create-user.php");
+         header("Location: datatable.php");
         }    
         
     }
@@ -184,11 +184,11 @@ if(isset($_POST["updateUser"]))
    if($query_run)
    {
     $_SESSION['status'] = "user Updated successfully";
-     header("Location: create-user.php");
+     header("Location: datatable.php");
    }
    else{
     $_SESSION['status'] = "user updating failed";
-    header("Location: create-user.php");
+    header("Location: datatable.php");
    }
 }
 
@@ -202,11 +202,11 @@ if(isset($_POST["DeleteUserbtn"]))
     if($query_run)
    {
     $_SESSION['status'] = "user Deleted successfully";
-     header("Location: create-user.php");
-   }
+     header("Location: datatable.php");
+   }    
    else{
     $_SESSION['status'] = "user deleting failed";
-    header("Location: create-user.php");
+    header("Location: datatable.php");
    }
 }
 
