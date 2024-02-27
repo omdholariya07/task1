@@ -1,4 +1,5 @@
 <?php
+
 include('authentication.php');
 include('includes/header.php');
 include('includes/topbar.php');
@@ -27,8 +28,10 @@ include('config/dbcon.php');
                 <div class="col-sm-6">
                     <h1 class="m-0">Dashboard</h1>
                 </div><!-- /.col -->
-
+                <?php include('message.php'); ?>
                 <div class="col-sm-12">
+
+                   
 
                     <ol class="breadcrumb float-sm-right">
 
