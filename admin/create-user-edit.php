@@ -200,9 +200,8 @@ include('config/dbcon.php');
 </div>
 
 
-<?php
- include('includes/script.php');
-?>
+<?php include('includes/script.php'); ?>
+
 <script>
 $(function() {
     $("#my_date_picker").datepicker({

@@ -32,9 +32,10 @@ include('config/dbcon.php');
         </div>
     </div>
   <!-- /.content-header -->
-
-  <section class="content">
-      <div class="container">
+  <div class="content-wrapper">
+    
+  <section class="content"> 
+      <div class="container-fluid">
           <div class="row">
               <div class="col-md-12">
                   <?php
@@ -80,6 +81,7 @@ include('config/dbcon.php');
                                   <tr>
                                       <td><?php echo $row['id']; ?></td>
                                       <?php  echo '<td><img src="' . $row['userimage'] . '" alt="User Image" style="width:50px;height:50px;"></td>';?>
+                                    
                                       <td><?php echo $row['firstname']; ?>
                                           <?php echo $row['lastname']; ?> </td>
                                       <td><?php echo $row['city']; ?></td>
@@ -116,7 +118,7 @@ include('config/dbcon.php');
           </div>
       </div>
   </section>
-
+                </div>
 
   <?php include('includes/script.php'); ?>
   

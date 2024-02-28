@@ -46,120 +46,156 @@ include('config/dbcon.php');
         </div><!-- /.container-fluid -->
 
     </div>
-    <form action="code.php" method="POST" id="quickForm" enctype="multipart/form-data">
-        <div class="modal-body">
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="">first name*</label>
-                    <input type="text" name="firstname" class="form-control" placeholder="first Name" required>
-                </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Create User</h3>
+                        </div>
+                        <form action="code.php" method="POST" id="quickForm" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="">first name*</label>
+                                        <input type="text" name="firstname" class="form-control"
+                                            placeholder="first Name" required>
+                                    </div>
 
-                <div class="form-group">
-                    <label for="">last name*</label>
-                    <input type="text" name="lastname" class="form-control" placeholder="last Name" required>
-                </div>
+                                    <div class="form-group">
+                                        <label for="">last name*</label>
+                                        <input type="text" name="lastname" class="form-control" placeholder="last Name"
+                                            required>
+                                    </div>
 
-                <div class="form-group">
-                    <label for="address">Address</label>
-                    <textarea id="address" name="address" rows="4" cols="50">
+                                    <div class="form-group">
+                                        <label for="address">Address</label>
+                                        <textarea id="address" name="address" rows="4" cols="50">
 
                            </textarea>
-                </div>
+                                    </div>
 
-                <div class="form-group">
-                    <label for="">city*</label>
-                    <input type="text" name="city" class="form-control" placeholder="city" required>
-                </div>
+                                    <div class="form-group">
+                                        <label for="">city*</label>
+                                        <input type="text" name="city" class="form-control" placeholder="city" required>
+                                    </div>
 
 
 
-                <div class="form-group">
-                    <label for="">state*</label>
-                    <select id="stateSelect" name="state" class="state-select" style="width: 100%">
-                        <?php        
+                                    <div class="form-group">
+                                        <label for="">state*</label>
+                                        <select id="stateSelect" name="state" class="state-select" style="width: 100%">
+                                            <?php        
                                                 $states = ["New York", "California", "Texas", "Florida", "Illinois"];
                                                 foreach ($states as $state) {
                                                 $value = str_replace(' ', '', $state);
                                                 echo '<option value="' . $value . '">' . $state . '</option>';
                                                 }
                                                 ?>
-                    </select>
-                </div>
+                                        </select>
+                                    </div>
 
 
-                <div class="form-group">
-                    <label for="country">Country*</label>
-                    <select id="country" name="country" class="form-control" required>
-                        <?php
+
+                                    <div class="form-group">
+                                        <label for="country">Country*</label>
+                                        <select id="country" name="country" class="form-control" required>
+                                            <option value=''> please select </option>
+                                            <?php
                                 
                                 $countries = array("USA", "India", "UK", "Australia", "Germany");
-
+                              
                                   foreach ($countries as $country) {
                                  echo '<option value="' . $country . '">' . $country . '</option>';
                                }
                                 ?>
-                    </select>
-                </div>
+                                        </select>
+                                    </div>
 
 
-                <div class="form-group">
-                    <label for="">email*</label>
-                    <span class="email_error text-danger ml-2"></span>
-                    <input type="email" name="email" class="form-control email_id" placeholder="email" required>
-                </div>
-
-                <div class="form-group">
-                    <label> gender* </label> <br>
-                    <input type="radio" name="gender" value="male" required> Male
-                    <input type="radio" name="gender" value="female" required> Female
-                </div>
 
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="">password*</label>
-                            <input type="password" name="password" class="form-control" placeholder="password" required>
-                           
-                               
-                        </div>
+                                    <div class="form-group">
+                                        <label for="">email*</label>
+                                        <span class="email_error text-danger ml-2"></span>
+                                        <input type="email" name="email" class="form-control email_id"
+                                            placeholder="email" required>
+                                    </div>
 
+                                    <div class="form-group">
+                                        <label> gender* </label> <br>
+                                        <input type="radio" name="gender" value="male" required> Male
+                                        <input type="radio" name="gender" value="female" required> Female
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">password*</label>
+                                                <input type="password" name="password" class="form-control"
+                                                    placeholder="password" required>
+
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">confirm password*</label>
+                                                <input type="password" name="confirmpassword" class="form-control"
+                                                    placeholder="confirm password" required>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="">user image*</label>
+                                        <input type="file" name="userimage">
+
+                                    </div>
+                                    <!--   <div class="form-group">
+                    <label for="exampleInputFile">User Image</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="userimage" id="exampleInputFile">
+                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                      </div>
+                      <div class="input-group-append">
+                        <span class="input-group-text">Upload</span>
+                      </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="">confirm password*</label>
-                            <input type="password" name="confirmpassword" class="form-control"
-                                placeholder="confirm password" required>
-                        </div>
+                  </div> -->
 
+
+
+                                    <div class="form-group">
+                                        <label for="Dob">Date of birth</label>
+                                        <input type="text" name="Dob" id="my_date_picker">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                            <div class="card-footer">
+                  <button type="submit" name="addUser" class="btn btn-primary">Submit</button>
+                </div>
+                              <!--  <button type="submit" name="addUser" class="btn btn-primary">Add</button> -->
+                            </div>
+                        </form>
                     </div>
                 </div>
-
-
-                <div class="form-group">
-                    <label for="">user image*</label>
-                    <input type="file" name="userimage">
-
-                </div>
-
-
-
-                <div class="form-group">
-                    <label for="Dob">Date of birth</label>
-                    <input type="text" name="Dob" id="my_date_picker">
-                </div>
-
             </div>
         </div>
-
-        <div class="modal-footer">
-            <!--   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-            <button type="submit" name="addUser" class="btn btn-primary">Add</button>
-        </div>
-    </form>
 </div>
 </div>
-</div>
+</section>
 
 <!-- delete User 
     <div class="modal fade" id="DeletModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -217,10 +253,10 @@ $('#quickForm').validate({
             required: true,
             city: true,
         },
-        // country: {
-        //     required: true,
-        //     country: true,
-        // },
+        country: {
+            required: true,
+            country: true,
+        },
         password: {
             required: true,
             minlength: 3
@@ -245,9 +281,9 @@ $('#quickForm').validate({
         city: {
             required: "Please enter your city"
         },
-        // country: {
-        //     required: "Please select your country"
-        // },
+        country: {
+            required: "Please select your country"
+        },
         email: {
             required: "Please enter a email address",
             email: "Please enter a valid email address"
@@ -258,12 +294,12 @@ $('#quickForm').validate({
         },
         confirmpassword: {
             required: "Please enter confirm password",
-            equalTo : 'Password not matching',
+            equalTo: 'Password not matching',
         },
         userimage: {
             required: "Please enter your image",
         },
-         terms: "Please accept our terms"
+        terms: "Please accept our terms"
     },
     errorElement: 'span',
     errorPlacement: function(error, element) {

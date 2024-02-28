@@ -69,8 +69,8 @@ if(isset($_POST['addUser']))
   
  
  //  $userimage = $_POST['userimage'];
-   $Dateofbirth = $_POST['Dob'];
-   //$Dateofbirth = isset($_POST['Dob']) ? $_POST['Dob'] : NULL;
+//    $Dateofbirth = $_POST['Dob'];
+   $Dateofbirth = $_POST['Dob'] != '' ? "'".$_POST['Dob'] ."'" : "null";
   
    
    
@@ -92,19 +92,19 @@ if(isset($_POST['addUser']))
     else
     {
          
-        echo " record not found ";
+        // echo " record not found ";
       
-        // echo "<pre>";print_r($_POST);
-        // print_r($user_query);
+       
+        //  echo "<pre>";
+        // print_r($Dateofbirth);
         // echo "</pre>";
         // exit();
-        // 
         
         if (isset($_POST['addUser'])) {    
 
-           if (!empty($Dateofbirth)) {
-                $Dateofbirth = $_POST['Dob'];
-           }
+        //    if (!empty($Dateofbirth)) {
+        //         $Dateofbirth = $_POST['Dob'];
+        //    }
 
           //  $userimage = $_FILES['userimage']['name'];
            // if(isset($_FILES['userimage']['name']) && $_FILES['userimage']['error'] === UPLOAD_ERR_OK) {
@@ -122,10 +122,13 @@ if(isset($_POST['addUser']))
          //   }
                 
             
-               $user_query = "INSERT INTO `user` (`firstname`,`lastname`,`address`,`city`,`state`,`country`,`email`,`gender`,`password`,`userimage`,`Dob`) VALUES ('$firstname','$lastname','$address','$city','$state','$country','$email','$gender','$password','$folder','$Dateofbirth')";
+               $user_query = "INSERT INTO `user` (`firstname`,`lastname`,`address`,`city`,`state`,`country`,`email`,`gender`,`password`,`userimage`,`Dob`) VALUES ('$firstname','$lastname','$address','$city','$state','$country','$email','$gender','$password','$folder',$Dateofbirth)";
 
+            //    echo "<pre>";
+            //    print_r($user_query);
+            //    echo "</pre>";
+            //    exit();
                $user_query_run = mysqli_query($conn,$user_query);
-
          $_SESSION['status'] = "user added successfully";
           header("Location: datatable.php");
         }
