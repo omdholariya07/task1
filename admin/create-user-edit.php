@@ -37,22 +37,23 @@ include('config/dbcon.php');
     <!-- /.content-header -->
 
     <section class="content">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
 
-                    <div class="card">
+                    <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">Edit - Registered User</h3>
                             <a href="datatable.php" class="btn btn-danger float-sm-right"> BACK </a>
                         </div>
                         <!-- /.card-header-->
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <form action="code.php" method="POST" enctype="multipart/form-data">
-                                        <div class="modal-body">
-                                            <?php
+                        <form action="code.php" method="POST" enctype="multipart/form-data">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+
+
+                                        <?php
                         if(isset($_GET['user_id']))
                         {
                             $user_id = $_GET['user_id'];
@@ -66,110 +67,108 @@ include('config/dbcon.php');
                               foreach($query_run as $row)
                               {
                                 ?>
-                                            <input type="hidden" name="user_id" value="<?php echo $row['id'] ?>">
-                                            <div class="form-group">
-                                                <label for="">first name*</label>
-                                                <input type="text" name="firstname"
-                                                    value="<?php echo $row['firstname'] ?>" class="form-control"
-                                                    placeholder="first Name">
-                                            </div>
+                                        <input type="hidden" name="user_id" value="<?php echo $row['id'] ?>">
+                                        <div class="form-group">
+                                            <label for="">first name*</label>
+                                            <input type="text" name="firstname" value="<?php echo $row['firstname'] ?>"
+                                                class="form-control" placeholder="first Name">
+                                        </div>
 
-                                            <div class="form-group">
-                                                <label for="">last name*</label>
-                                                <input type="text" name="lastname"
-                                                    value="<?php echo $row['lastname'] ?>" class="form-control"
-                                                    placeholder="last Name">
-                                            </div>
+                                        <div class="form-group">
+                                            <label for="">last name*</label>
+                                            <input type="text" name="lastname" value="<?php echo $row['lastname'] ?>"
+                                                class="form-control" placeholder="last Name">
+                                        </div>
 
-                                            <div class="form-group">
-                                                <label for="address">Address</label>
-                                                <textarea id="address" name="address" rows="4"
-                                                    cols="50"><?php echo htmlspecialchars($row['address']); ?></textarea>
-                                            </div>
+                                        <div class="form-group">
+                                            <label for="address">Address</label>
+                                            <textarea id="address" name="address" rows="4"
+                                                cols="50"><?php echo htmlspecialchars($row['address']); ?></textarea>
+                                        </div>
 
 
-                                            <div class="form-group">
-                                                <label for="">city*</label>
-                                                <input type="text" name="city" value="<?php echo $row['city'] ?>"
-                                                    class="form-control" placeholder="city">
-                                            </div>
+                                        <div class="form-group">
+                                            <label for="">city*</label>
+                                            <input type="text" name="city" value="<?php echo $row['city'] ?>"
+                                                class="form-control" placeholder="city">
+                                        </div>
 
 
-                                            <div class="form-group">
-                                                <label for="">state*</label>
-                                                <select id="stateSelect" name="state" class="state-select"
-                                                    style="width: 100%">
-                                                    <?php        
+                                        <div class="form-group">
+                                            <label for="">state*</label>
+                                            <select id="stateSelect" name="state" class="state-select"
+                                                style="width: 100%">
+                                                <?php        
                                                 $states = ["New York", "California", "Texas", "Florida", "Illinois"];
                                                 foreach ($states as $state) {
                                                 $value = str_replace(' ', '', $state);
                                                 echo '<option value="' . $value . '">' . $state . '</option>';
                                                 }
                                                 ?>
-                                                </select>
-                                            </div>
+                                            </select>
+                                        </div>
 
 
 
-                                            <div class="form-group">
-                                                <label for="country">Country</label>
-                                                <select id="country" name="country" class="form-control" required>
-                                                    <?php
+                                        <div class="form-group">
+                                            <label for="country">Country</label>
+                                            <select id="country" name="country" class="form-control" required>
+                                                <?php
                                                 $countries = array("USA", "India", "UK", "Australia", "Germany");
                                                  foreach ($countries as $country) {
                                                  $selected = ($row['country'] == $country) ? 'selected' : '';
                                                  echo '<option value="' . $country . '" ' . $selected . '>' . $country . '</option>';
                                               }
                                                 ?>
-                                                </select>
-                                            </div>
-
-
-
-
-                                            <div class="form-group">
-                                                <label for="">email*</label>
-                                                <input type="email" name="email" value="<?php echo $row['email'] ?>"
-                                                    class="form-control" placeholder="email">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label> gender* </label> <br>
-                                                <input type="radio" name="gender" value="male"
-                                                    <?php echo $row['gender'] == "male" ? "checked" : ""; ?>> Male
-                                                <input type="radio" name="gender" value="female"
-                                                    <?php echo $row['gender'] == "female" ? "checked" : ""; ?>> Female
-                                            </div>
-
-
-
-                                            <div class="form-group">
-                                                <label for="">Password*</label>
-                                                <input type="password" name="password" class="form-control"
-                                                    placeholder="password">
-                                            </div>
-                                            
-
-                                            <div class="form-group">
-                                                <label for="userimage">User Image*</label>
-                                                <input type="file" name="userimage">
-
-                                                <?php if (!empty($row['userimage'])) : ?>
-                                                <img src="<?php echo $row['userimage']; ?>" alt="Current User Image"
-                                                    style="width: 50px; height: 50px;">
-                                                <?php endif; ?>
-                                            </div>
-
-
-                                            <div class="form-group">
-                                                <label for="Dob">Date of birth</label>
-                                                <input type="text" name="Dob" id="my_date_picker"
-                                                    value="<?php echo $row['Dob'] ?>">
-                                            </div>
-
-
+                                            </select>
                                         </div>
-                                        <?php
+
+
+
+
+                                        <div class="form-group">
+                                            <label for="">email*</label>
+                                            <input type="email" name="email" value="<?php echo $row['email'] ?>"
+                                                class="form-control" placeholder="email">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label> gender* </label> <br>
+                                            <input type="radio" name="gender" value="male"
+                                                <?php echo $row['gender'] == "male" ? "checked" : ""; ?>> Male
+                                            <input type="radio" name="gender" value="female"
+                                                <?php echo $row['gender'] == "female" ? "checked" : ""; ?>> Female
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            <label for="">Password*</label>
+                                            <input type="password" name="password" class="form-control"
+                                                placeholder="password">
+                                        </div>
+
+
+                                        <div class="form-group">#
+                                            <label for="userimage">User Image</label>
+                                            <input type="file" name="userimage">
+
+                                            <?php if (!empty($row['userimage'])) : ?>
+                                            <img src="<?php echo $row['userimage']; ?>" alt="Current User Image"
+                                                style="width: 50px; height: 50px;">
+                                            <?php endif; ?>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label for="Dob">Date of birth</label>
+                                            <input type="text" name="Dob" id="my_date_picker"
+                                                value="<?php echo $row['Dob'] ?>">
+                                        </div>
+
+
+                                    </div>
+                                    <?php
                               }  
                             }
                             else
@@ -180,23 +179,23 @@ include('config/dbcon.php');
                        
                        
                         ?>
-                                       
 
-                                                            <div class="modal-footer">
-                                                                <button type="submit" name="updateUser"
-                                                                    class="btn btn-info">Update</button>
-                                                            </div>
 
-                                                            </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" name="updateUser" class="btn btn-info">Update</button>
+                                    </div>
+
                                 </div>
                             </div>
-                        </div>
                     </div>
-    </section>
+                </div>
+                </form>
+
+            </div>
+        </div>
+</div>
+</div>
+</section>
 </div>
 
 

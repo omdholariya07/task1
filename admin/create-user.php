@@ -88,6 +88,7 @@ include('config/dbcon.php');
                                     <div class="form-group">
                                         <label for="">state*</label>
                                         <select id="stateSelect" name="state" class="state-select" style="width: 100%">
+                                        <option value=''>Select your state </option>
                                             <?php        
                                                 $states = ["New York", "California", "Texas", "Florida", "Illinois"];
                                                 foreach ($states as $state) {
@@ -103,7 +104,7 @@ include('config/dbcon.php');
                                     <div class="form-group">
                                         <label for="country">Country*</label>
                                         <select id="country" name="country" class="form-control" required>
-                                            <option value=''> please select </option>
+                                            <option value=''>Select your country </option>
                                             <?php
                                 
                                 $countries = array("USA", "India", "UK", "Australia", "Germany");
@@ -155,7 +156,7 @@ include('config/dbcon.php');
 
 
                                     <div class="form-group">
-                                        <label for="">user image*</label>
+                                        <label for="">user image</label>
                                         <input type="file" name="userimage">
 
                                     </div>
@@ -253,18 +254,23 @@ $('#quickForm').validate({
             required: true,
             city: true,
         },
+        state: {
+            required: true,
+            state: true,
+        },
         country: {
             required: true,
             country: true,
+        },
+        gender: {
+            required: true,
+            gender: true,
         },
         password: {
             required: true,
             minlength: 3
         },
         confirmpassword: {
-            required: true,
-        },
-        userimage: {
             required: true,
         },
         terms: {
@@ -281,12 +287,19 @@ $('#quickForm').validate({
         city: {
             required: "Please enter your city"
         },
+        state: {
+            required: "Please enter your state"
+        },
         country: {
             required: "Please select your country"
         },
         email: {
             required: "Please enter a email address",
             email: "Please enter a valid email address"
+        },
+        gender: {
+            required: "Please select your gender",
+           
         },
         password: {
             required: "Please enter password",
@@ -295,9 +308,6 @@ $('#quickForm').validate({
         confirmpassword: {
             required: "Please enter confirm password",
             equalTo: 'Password not matching',
-        },
-        userimage: {
-            required: "Please enter your image",
         },
         terms: "Please accept our terms"
     },

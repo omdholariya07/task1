@@ -6,39 +6,39 @@ include('includes/topbar.php');
 include('includes/sidebar.php');
 include('config/dbcon.php');
 ?>
-<div class="modal fade" id="DeletModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Delete User</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="code.php" method="POST">
-                    <div class="modal-body">
-                        <input type="hidden" name="delete_id" class="delete_user_id">
-                        <p>
-                            Are you sure, you want to delete this data ?
-                        </p>
-                    </div> 
+  <div class="modal fade" id="DeletModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Delete User</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <form action="code.php" method="POST">
+                  <div class="modal-body">
+                      <input type="hidden" name="delete_id" class="delete_user_id">
+                      <p>
+                          Are you sure, you want to delete this data ?
+                      </p>
+                  </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" name="DeleteUserbtn" class="btn btn-primary">Yes, Delete.!</button>
-                    </div> 
-                </form> 
-                </div>
-        </div>
-    </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" name="DeleteUserbtn" class="btn btn-primary">Yes, Delete.!</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
   <!-- /.content-header -->
   <div class="content-wrapper">
-    
-  <section class="content"> 
-      <div class="container-fluid">
-          <div class="row">
-              <div class="col-md-12">
-                  <?php
+
+      <section class="content">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-md-12">
+                      <?php
                     if (isset($_SESSION['status'])) 
                     {
                         echo "<h4>".$_SESSION['status']."</h4>";    
@@ -46,10 +46,11 @@ include('config/dbcon.php');
                     }
                     ?>
 
-                  <div class="card">
-                      <div class="card-header">
-                          <h3 class="card-title">Registered User</h3>
-                        <!--  <a href="#" data-toggle="modal" data-target="#AddUserModal"
+                      <div class="card card-info">
+                          <div class="card-header">
+                              <h3 class="card-title">Register User</h3>
+                          </div>
+                          <!--  <a href="#" data-toggle="modal" data-target="#AddUserModal"
                               class="btn btn-primary float-sm-right"> Add
                               User </a> -->
                       </div>
@@ -81,7 +82,7 @@ include('config/dbcon.php');
                                   <tr>
                                       <td><?php echo $row['id']; ?></td>
                                       <?php  echo '<td><img src="' . $row['userimage'] . '" alt="User Image" style="width:50px;height:50px;"></td>';?>
-                                    
+
                                       <td><?php echo $row['firstname']; ?>
                                           <?php echo $row['lastname']; ?> </td>
                                       <td><?php echo $row['city']; ?></td>
@@ -90,10 +91,10 @@ include('config/dbcon.php');
                                       <td>
                                           <a href="create-user-edit.php?user_id=<?php echo $row['id']; ?>"
                                               class="btn btn-info btn-sm">Edit</a>
-                                        
-                                            
-                                       <button type="button" value=<?php echo $row['id']; ?>
-                                              class="btn btn-danger btn-sm deletebtn ">Delete</button> 
+
+
+                                          <button type="button" value=<?php echo $row['id']; ?>
+                                              class="btn btn-danger btn-sm deletebtn ">Delete</button>
                                       </td>
                                   </tr>
                                   <?php
@@ -116,24 +117,23 @@ include('config/dbcon.php');
                   </div>
               </div>
           </div>
-      </div>
+  </div>
   </section>
-                </div>
+  </div>
 
   <?php include('includes/script.php'); ?>
-  
 
-<script>
-    $(document).ready(function() {
-    });
-    $('.deletebtn').click(function(e) {
-                e.preventDefault();
 
-        var user_id = $(this).val();
-        //console.log(user_id);
-        $('.delete_user_id').val(user_id);
-        $('#DeletModal').modal('show');
-    });
-</script>
+  <script>
+$(document).ready(function() {});
+$('.deletebtn').click(function(e) {
+    e.preventDefault();
+
+    var user_id = $(this).val();
+    //console.log(user_id);
+    $('.delete_user_id').val(user_id);
+    $('#DeletModal').modal('show');
+});
+  </script>
 
   <?php include('includes/footer.php'); ?>

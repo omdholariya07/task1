@@ -38,8 +38,7 @@
                  </button>
                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                      
-                     <li><a class="dropdown-item" href="#">Another action</a></li>
-                     <li><a class="dropdown-item" href="#">Something else here</a></li>
+                
                      <form action="code.php"  method="POST">
                       <button type="submit" name="logout_btn" class="dropdown-item">Logout</button>
                     </form>
