@@ -88,7 +88,7 @@ include('config/dbcon.php');
                                     <div class="form-group">
                                         <label for="">state*</label>
                                         <select id="stateSelect" name="state" class="state-select" style="width: 100%">
-                                        <option value=''>Select your state </option>
+                                            <option value=''>Select your state </option>
                                             <?php        
                                                 $states = ["New York", "California", "Texas", "Florida", "Illinois"];
                                                 foreach ($states as $state) {
@@ -138,7 +138,7 @@ include('config/dbcon.php');
                                             <div class="form-group">
                                                 <label for="">password*</label>
                                                 <input type="password" name="password" class="form-control"
-                                                    placeholder="password" required>
+                                                id= "password" placeholder="password" required>
 
 
                                             </div>
@@ -148,30 +148,46 @@ include('config/dbcon.php');
                                             <div class="form-group">
                                                 <label for="">confirm password*</label>
                                                 <input type="password" name="confirmpassword" class="form-control"
-                                                    placeholder="confirm password" required>
+                                                id= "confirmpassword"  placeholder="confirm password" required>
                                             </div>
 
                                         </div>
                                     </div>
 
 
-                                    <div class="form-group">
+                                    <!--   <div class="form-group">
                                         <label for="">user image</label>
                                         <input type="file" name="userimage">
 
+                                    </div> -->
+                                    <!-- <div class="form-group">
+                                        <label for="">User Image</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="userimage"
+                                                    id="userImageInput">
+                                                <label class="custom-file-label" for="">Choose file</label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">Upload</span>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="form-group">
+                                        <label for="">User Image</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="userimage"
+                                                    id="userImageInput">
+                                                <label class="custom-file-label" for="userImageInput">Choose
+                                                    file</label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">Upload</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <!--   <div class="form-group">
-                    <label for="exampleInputFile">User Image</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="userimage" id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                      </div>
-                      <div class="input-group-append">
-                        <span class="input-group-text">Upload</span>
-                      </div>
-                    </div>
-                  </div> -->
+
 
 
 
@@ -184,10 +200,10 @@ include('config/dbcon.php');
                             </div>
 
                             <div class="modal-footer">
-                            <div class="card-footer">
-                  <button type="submit" name="addUser" class="btn btn-primary">Submit</button>
-                </div>
-                              <!--  <button type="submit" name="addUser" class="btn btn-primary">Add</button> -->
+                                <div class="card-footer">
+                                    <button type="submit" name="addUser" class="btn btn-primary">Submit</button>
+                                </div>
+                                <!--  <button type="submit" name="addUser" class="btn btn-primary">Add</button> -->
                             </div>
                         </form>
                     </div>
@@ -197,43 +213,21 @@ include('config/dbcon.php');
 </div>
 </div>
 </section>
-
-<!-- delete User 
-    <div class="modal fade" id="DeletModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Delete User</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="code.php" method="POST">
-                    <div class="modal-body">
-                        <input type="hidden" name="delete_id" class="delete_user_id">
-                        <p>
-                            Are you sure, you want to delete this data ?
-                        </p>
-                    </div> 
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" name="DeleteUserbtn" class="btn btn-primary">Yes, Delete.!</button>
-                    </div> 
-                </form>
-            </div>
-        </div>
-    </div> -->
-
-
-
-
-
 </div>
 
 
 <?php
 include('includes/script.php'); ?>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+    document.getElementById('userImageInput').addEventListener('change', function() {
+        var fileName = this.value.split('\\').pop();
+        document.querySelector('.custom-file-label').textContent = fileName;
+    });
+});
+</script>
 
 <script>
 $('#quickForm').validate({
@@ -272,6 +266,7 @@ $('#quickForm').validate({
         },
         confirmpassword: {
             required: true,
+            equalTo: "#password"
         },
         terms: {
             required: true
@@ -299,7 +294,7 @@ $('#quickForm').validate({
         },
         gender: {
             required: "Please select your gender",
-           
+
         },
         password: {
             required: "Please enter password",
@@ -307,7 +302,12 @@ $('#quickForm').validate({
         },
         confirmpassword: {
             required: "Please enter confirm password",
-            equalTo: 'Password not matching',
+            equalTo: function () {
+                console.log($("#password").val());
+                console.log($("#confirmpassword").val());
+                return ($("#password").val() === $("#confirmpassword").val()) ? "Passwords match" : "Password doesn't match";
+            }
+        
         },
         terms: "Please accept our terms"
     },

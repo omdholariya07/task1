@@ -14,9 +14,6 @@ include('config/dbcon.php');
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Dashboard</h1>
-                </div><!-- /.col -->
 
                 <div class="col-sm-12">
 
@@ -149,14 +146,32 @@ include('config/dbcon.php');
                                         </div>
 
 
-                                        <div class="form-group">#
+                                        <!-- <div class="form-group">
                                             <label for="userimage">User Image</label>
                                             <input type="file" name="userimage">
 
-                                            <?php if (!empty($row['userimage'])) : ?>
+                                            
+                                        </div> -->
+
+                                        <div class="form-group">
+                                            <label for="">User Image</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" name="userimage"
+                                                        id="userImageInput">
+                                                    <label class="custom-file-label" for="">Choose file
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">Upload</span>
+                                                </div>
+
+                                            </div>
                                             <img src="<?php echo $row['userimage']; ?>" alt="Current User Image"
-                                                style="width: 50px; height: 50px;">
-                                            <?php endif; ?>
+                                                style="width: 100px; height: 100px; padding: 10px;">
+
                                         </div>
 
 
@@ -200,6 +215,17 @@ include('config/dbcon.php');
 
 
 <?php include('includes/script.php'); ?>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+    document.getElementById('userImageInput').addEventListener('change', function() {
+        var fileName = this.value.split('\\').pop();
+        document.querySelector('.custom-file-label').textContent = fileName;
+    });
+});
+</script>
+
 
 <script>
 $(function() {

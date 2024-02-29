@@ -37,7 +37,7 @@
          
           <li class="nav-item">
             <a href="./create-user.php" class="nav-link ">
-            <i class="fa fa-user-plus" ></i>
+            <i class="fa fa-user-plus"></i>
               <p>
                Create User
                
@@ -46,13 +46,13 @@
             
           <li class="nav-item">
             <a href="./datatable.php" class="nav-link">
-            <i class='far fa-address-card'></i>
+            <i class="far fa-address-card"></i>
               <p>
                View
               </p>
             </a>
           </li>
-       <!--   <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="./datatable.php" class="nav-link">
             <i class='fas fa-file-csv'></i>
               <p>
