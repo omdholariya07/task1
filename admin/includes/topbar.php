@@ -1,6 +1,3 @@
-<!--<?php
-//print_r($_SESSION);
- // exit(); ?> -->
  <!-- Navbar -->
  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
      <!-- Left navbar links -->
@@ -69,8 +66,6 @@
          </li>
 
          <!-- Messages Dropdown Menu -->
-
-
-         
+       
  </nav>
  <!-- /.navbar -->

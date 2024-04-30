@@ -65,6 +65,8 @@ include('config/dbcon.php');
                               {
                                 ?>
                                         <input type="hidden" name="user_id" value="<?php echo $row['id'] ?>">
+                                        <input type="hidden" name="old_userimage" value="<?php echo $row['userimage']; ?>">
+
                                         <div class="form-group">
                                             <label for="">first name*</label>
                                             <input type="text" name="firstname" value="<?php echo $row['firstname'] ?>"
@@ -79,7 +81,7 @@ include('config/dbcon.php');
 
                                         <div class="form-group">
                                             <label for="address">Address</label>
-                                            <textarea id="address" name="address" rows="4"
+                                            <textarea id="address" name="address" rows="4" class="form-control"
                                                 cols="50"><?php echo htmlspecialchars($row['address']); ?></textarea>
                                         </div>
 
@@ -145,46 +147,39 @@ include('config/dbcon.php');
                                                 placeholder="password">
                                         </div>
 
-
-                                        <!-- <div class="form-group">
-                                            <label for="userimage">User Image</label>
-                                            <input type="file" name="userimage">
-
-                                            
-                                        </div> -->
-
                                         <div class="form-group">
                                             <label for="">User Image</label>
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" name="userimage"
                                                         id="userImageInput">
-                                                    <label class="custom-file-label" for="">Choose file
-                                                    </label>
-
+                                                    <label class="custom-file-label" for="">Choose file</label>
                                                 </div>
-
                                                 <div class="input-group-append">
                                                     <span class="input-group-text">Upload</span>
                                                 </div>
-
                                             </div>
                                             <img src="<?php echo $row['userimage']; ?>" alt="Current User Image"
                                                 style="width: 100px; height: 100px; padding: 10px;">
-
                                         </div>
-
 
                                         <div class="form-group">
-                                            <label for="Dob">Date of birth</label>
-                                            <input type="text" name="Dob" id="my_date_picker"
-                                                value="<?php echo $row['Dob'] ?>">
+                                            <label>Date of birth*</label>
+                                            <div class="input-group date" id="reservationdate"
+                                                data-target-input="nearest">
+                                                <input type="text" name="Dob" value="<?php echo $row['Dob'] ?>"
+                                                    class="form-control datetimepicker-input"
+                                                    data-target="#reservationdate" required />
+                                                <div class="input-group-append" data-target="#reservationdate"
+                                                    data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                </div>
+                                            </div>
                                         </div>
-
 
                                     </div>
                                     <?php
-                              }  
+                              }     
                             }
                             else
                             {
@@ -194,7 +189,6 @@ include('config/dbcon.php');
                        
                        
                         ?>
-
 
                                     <div class="modal-footer">
                                         <button type="submit" name="updateUser" class="btn btn-info">Update</button>
@@ -229,16 +223,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <script>
 $(function() {
-    $("#my_date_picker").datepicker({
-        dateFormat: 'yy-mm-dd',
-        defaultDate: "2019-09-24"
+    $("#reservationdate").datetimepicker({
+        format: 'YYYY-MM-DD'
     });
 });
 </script>
 
 <script>
 $(document).ready(function() {
-    // Initialize Select2
     $('#stateSelect').select2({
         placeholder: "Select a state",
         allowClear: true

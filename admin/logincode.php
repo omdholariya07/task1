@@ -15,11 +15,7 @@ if(isset($_POST['login']))
      foreach($login_query_run as $row){
         $user_id = $row['id'];
         $user_firstname = $row['firstname'];
-       // $user_lastname = $row["lastname"];
-       // $user_city = $row["city"];
-       // $user_state = $row["state"];
         $user_email = $row['email'];
-       // $user_userimage = $row["userimage"];
 
      }
 
@@ -27,11 +23,7 @@ if(isset($_POST['login']))
      $_SESSION['auth_user'] = [
        'user_id'=>$user_id,
       'user_firstname'=>$user_firstname,
-     //'user_lastname' => $user_lastname,
-     // 'user_city' => $user_city,
-      //'user_state' => $user_state,
-       'user_email'=>$user_email,
-       //'user_userimage' => $user_userimage
+       'user_email'=>$user_email, 
      ];
 
      $_SESSION['status'] = "Logged In Successfully";
