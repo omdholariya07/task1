@@ -4,6 +4,7 @@ include('authentication.php');
 include('includes/header.php');
 include('includes/topbar.php');
 include('includes/sidebar.php');
+//include('includes/get-user-details.php');
 include('config/dbcon.php');
 ?>
   <div class="modal fade" id="DeletModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -15,6 +16,7 @@ include('config/dbcon.php');
                       <span aria-hidden="true">&times;</span>
                   </button>
               </div>
+
               <form action="code.php" method="POST">
                   <div class="modal-body">
                       <input type="hidden" name="delete_id" class="delete_user_id">
@@ -28,6 +30,22 @@ include('config/dbcon.php');
                       <button type="submit" name="DeleteUserbtn" class="btn btn-primary">Yes, Delete.!</button>
                   </div>
               </form>
+          </div>
+      </div>
+  </div>
+
+  <div class="modal fade" id="ViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">User Details</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body" id="userDetails">
+
+              </div>
           </div>
       </div>
   </div>
@@ -50,9 +68,6 @@ include('config/dbcon.php');
                           <div class="card-header">
                               <h3 class="card-title">Register User</h3>
                           </div>
-                          <!--  <a href="#" data-toggle="modal" data-target="#AddUserModal"
-                              class="btn btn-primary float-sm-right"> Add
-                              User </a> -->
                       </div>
                       <!-- /.card-header-->
                       <div class="card-body">
@@ -95,6 +110,9 @@ include('config/dbcon.php');
 
                                           <button type="button" value=<?php echo $row['id']; ?>
                                               class="btn btn-danger btn-sm deletebtn ">Delete</button>
+
+                                          <button type="button" class="btn btn-primary btn-sm viewbtn"
+                                              data-userid="<?php echo $row['id']; ?>">View</button>
                                       </td>
                                   </tr>
                                   <?php
@@ -135,5 +153,29 @@ $('.deletebtn').click(function(e) {
     $('#DeletModal').modal('show');
 });
   </script>
+
+<script>
+$(document).ready(function() {
+    
+    $(document).on('click', '.viewbtn', function(e) {
+        e.preventDefault();
+
+        var user_id = $(this).data('userid');
+
+        $.ajax({
+            url: 'code.php',
+            method: 'POST',
+            data: {
+                user_id: user_id
+            },
+            success: function(response) {
+                $('#userDetails').html(response);
+                $('#ViewModal').modal('show');
+            }
+        });
+    });
+});
+</script>
+
 
   <?php include('includes/footer.php'); ?>

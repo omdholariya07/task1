@@ -122,7 +122,7 @@ else
       } else {
           // If no new image is uploaded, retain the old image path
           $userimage = $_POST['old_userimage'];
-          
+
           // Update user without changing the image
           $query = "UPDATE user SET firstname='$firstname',lastname='$lastname',address='$address',city='$city',state='$state',country='$country',email='$email',gender='$gender',Dob='$Dateofbirth' WHERE id='$user_id' ";
       }
@@ -156,6 +156,33 @@ if(isset($_POST["DeleteUserbtn"]))
     $_SESSION['status'] = "user deleting failed";
     header("Location: datatable.php");
    }
+}
+
+if(isset($_POST['user_id'])) {
+    $user_id = $_POST['user_id'];
+    
+    $query = "SELECT * FROM user WHERE id = $user_id";
+    $result = mysqli_query($conn, $query);
+    
+    if(mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        ?>
+        <div>
+            <p><strong>User ID:</strong> <?php echo $row['id']; ?></p>
+            <p><strong>User Image:</strong> <?php echo $row['userimage']; ?></p>  
+            <p><strong>Name:</strong> <?php echo $row['firstname'] . ' ' . $row['lastname']; ?></p>
+            <p><strong>City:</strong> <?php echo $row['city']; ?></p>
+            <p><strong>State:</strong> <?php echo $row['state']; ?></p>
+            <p><strong>Country:</strong> <?php echo $row['country']; ?></p>
+            <p><strong>Email:</strong> <?php echo $row['email']; ?></p>
+            <p><strong>Gender:</strong> <?php echo $row['gender']; ?></p>
+            <p><strong>Date of Birth:</strong> <?php echo $row['Dob']; ?></p>
+            
+        </div>
+        <?php
+    } else {
+        echo "User details not found.";
+    }
 }
 
 ?>
