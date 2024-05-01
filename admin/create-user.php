@@ -14,7 +14,7 @@ include('config/dbcon.php');
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">  
+                <div class="col-sm-6">
                     <h1 class="m-0">Dashboard</h1>
                 </div><!-- /.col -->
                 <?php include('message.php'); ?>
@@ -54,7 +54,8 @@ include('config/dbcon.php');
 
                                     <div class="form-group">
                                         <label for="address">Address</label>
-                                        <textarea id="address" name="address" rows="4" cols="50" class="form-control"></textarea>
+                                        <textarea id="address" name="address" rows="4" cols="50"
+                                            class="form-control"></textarea>
                                     </div>
 
                                     <div class="form-group">
@@ -263,7 +264,6 @@ $('.deletebtn').click(function(e) {
     e.preventDefault();
 
     var user_id = $(this).val();
-    //console.log(user_id);
     $('.delete_user_id').val(user_id);
     $('#DeletModal').modal('show');
 });
@@ -274,7 +274,6 @@ $(document).ready(function() {
 
     $('.email_id').keyup(function(e) {
         var email = $('.email_id').val();
-        //console.log(email);
 
         $.ajax({
             type: "POST",
@@ -284,7 +283,6 @@ $(document).ready(function() {
                 'email': email,
             },
             success: function(response) {
-                //console.log(response);
                 $('.email_error').text(response);
             }
         });
@@ -307,6 +305,5 @@ $('#stateSelect').select2({
     allowClear: true
 });
 </script>
-
 
 <?php include('includes/footer.php'); ?>

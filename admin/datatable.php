@@ -4,7 +4,6 @@ include('authentication.php');
 include('includes/header.php');
 include('includes/topbar.php');
 include('includes/sidebar.php');
-//include('includes/get-user-details.php');
 include('config/dbcon.php');
 ?>
   <div class="modal fade" id="DeletModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -34,22 +33,6 @@ include('config/dbcon.php');
       </div>
   </div>
 
-  <div class="modal fade" id="ViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">User Details</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-              <div class="modal-body" id="userDetails">
-
-              </div>
-          </div>
-      </div>
-  </div>
-  <!-- /.content-header -->
   <div class="content-wrapper">
 
       <section class="content">
@@ -92,7 +75,7 @@ include('config/dbcon.php');
                     {
                      foreach($query_run as $row)
                      {
-                       // echo $row['firstname'];
+                      
                        ?>
                                   <tr>
                                       <td><?php echo $row['id']; ?></td>
@@ -104,15 +87,22 @@ include('config/dbcon.php');
                                       <td><?php echo $row['state']; ?></td>
                                       <td><?php echo $row['email']; ?></td>
                                       <td>
+                                
+                                          <a href="user-profile.php?user_id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm">
+                                                    <i class="fas fa-folder"></i> View
+                                                </a>
+
+
                                           <a href="create-user-edit.php?user_id=<?php echo $row['id']; ?>"
-                                              class="btn btn-info btn-sm">Edit</a>
+                                              class="btn btn-info btn-sm">
+                                              <i class="fas fa-pencil-alt"></i> Edit
+                                          </a>
 
+                                          <button type="button" value="<?php echo $row['id']; ?>"
+                                              class="btn btn-danger btn-sm deletebtn ">
+                                              <i class="fas fa-trash"></i> Delete
+                                          </button>
 
-                                          <button type="button" value=<?php echo $row['id']; ?>
-                                              class="btn btn-danger btn-sm deletebtn ">Delete</button>
-
-                                          <button type="button" class="btn btn-primary btn-sm viewbtn"
-                                              data-userid="<?php echo $row['id']; ?>">View</button>
                                       </td>
                                   </tr>
                                   <?php
@@ -129,14 +119,14 @@ include('config/dbcon.php');
                     }
                     ?>
 
-                              </tbody>
+                              </tbody>  
                           </table>
                       </div>
                   </div>
               </div>
           </div>
-  </div>
-  </section>
+        </div>
+     </section>
   </div>
 
   <?php include('includes/script.php'); ?>
@@ -148,34 +138,9 @@ $('.deletebtn').click(function(e) {
     e.preventDefault();
 
     var user_id = $(this).val();
-    //console.log(user_id);
     $('.delete_user_id').val(user_id);
     $('#DeletModal').modal('show');
 });
   </script>
-
-<script>
-$(document).ready(function() {
-    
-    $(document).on('click', '.viewbtn', function(e) {
-        e.preventDefault();
-
-        var user_id = $(this).data('userid');
-
-        $.ajax({
-            url: 'code.php',
-            method: 'POST',
-            data: {
-                user_id: user_id
-            },
-            success: function(response) {
-                $('#userDetails').html(response);
-                $('#ViewModal').modal('show');
-            }
-        });
-    });
-});
-</script>
-
 
   <?php include('includes/footer.php'); ?>

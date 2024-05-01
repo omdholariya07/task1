@@ -139,7 +139,9 @@ else
           header("Location: datatable.php");
       }
    }
-   
+
+ // delete user
+
 if(isset($_POST["DeleteUserbtn"]))
 {
     $userid = $_POST["delete_id"];
@@ -158,31 +160,42 @@ if(isset($_POST["DeleteUserbtn"]))
    }
 }
 
-if(isset($_POST['user_id'])) {
+// view user
+if(isset($_POST['viewUser'])) {
     $user_id = $_POST['user_id'];
-    
-    $query = "SELECT * FROM user WHERE id = $user_id";
-    $result = mysqli_query($conn, $query);
-    
-    if(mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        ?>
-        <div>
-            <p><strong>User ID:</strong> <?php echo $row['id']; ?></p>
-            <p><strong>User Image:</strong> <?php echo $row['userimage']; ?></p>  
-            <p><strong>Name:</strong> <?php echo $row['firstname'] . ' ' . $row['lastname']; ?></p>
-            <p><strong>City:</strong> <?php echo $row['city']; ?></p>
-            <p><strong>State:</strong> <?php echo $row['state']; ?></p>
-            <p><strong>Country:</strong> <?php echo $row['country']; ?></p>
-            <p><strong>Email:</strong> <?php echo $row['email']; ?></p>
-            <p><strong>Gender:</strong> <?php echo $row['gender']; ?></p>
-            <p><strong>Date of Birth:</strong> <?php echo $row['Dob']; ?></p>
-            
-        </div>
-        <?php
-    } else {
-        echo "User details not found.";
-    }
+    header("Location: user-profile.php?user_id=$user_id");
+    exit();
 }
 
-?>
+//CSV
+// Check if the CSV button is clicked
+if(isset($_POST['generate_csv'])) {
+    // File name for download
+    $filename = "users_" . date('Ymd') . ".csv";
+
+    // Set headers for CSV file download
+    header('Content-Type: text/csv');
+    header('Content-Disposition: attachment; filename="' . $filename . '"');
+
+    // Open file pointer
+    $output = fopen('php://output', 'w');
+
+    // Fetch user data from database
+    $query = "SELECT id, firstname, lastname, address, city, state, country, email, gender, Dob FROM user";
+    $result = mysqli_query($conn, $query);
+
+    // Write CSV headers
+    fputcsv($output, array('ID', 'First Name', 'Last Name', 'Address', 'City', 'State', 'Country', 'Email', 'Gender', 'Date of Birth'));
+
+    // Write CSV rows
+    while ($row = mysqli_fetch_assoc($result)) {
+        fputcsv($output, $row);
+    }
+
+    // Close file pointer
+    fclose($output);
+
+    // Exit script after generating CSV
+    exit();
+}
+?>  
