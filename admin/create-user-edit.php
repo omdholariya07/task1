@@ -139,16 +139,8 @@ include('config/dbcon.php');
                                                 <?php echo $row['gender'] == "female" ? "checked" : ""; ?>> Female
                                         </div>
 
-
-
                                         <div class="form-group">
-                                            <label for="">Password*</label>
-                                            <input type="password" name="password" class="form-control"
-                                                placeholder="password">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="">User Image</label>
+                                            <label for="">User Image*</label>
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" name="userimage"

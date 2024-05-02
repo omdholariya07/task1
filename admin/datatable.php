@@ -89,7 +89,7 @@ include('config/dbcon.php');
                                       <td>
                                 
                                           <a href="user-profile.php?user_id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm">
-                                                    <i class="fas fa-folder"></i> View
+                                                    <i class="fas fa-eye"></i> View
                                                 </a>
 
 

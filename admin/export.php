@@ -33,7 +33,7 @@ include('config/dbcon.php');
                             <p><b>Click below button to download CSV file</b></p>
                                 <tr>
                                     <td>
-                                        <button type="submit" name="generate_csv" class="btn btn-success">Generate CSV</button> 
+                                        <button type="submit" name="generate_csv" class="btn btn-success">Download  CSV</button> 
                                     </td>
                                 </tr>
                             </table>

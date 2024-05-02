@@ -14,7 +14,25 @@ if (isset($_GET['user_id'])) {
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         ?>
+<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Profile</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">User Profile</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -22,9 +40,11 @@ if (isset($_GET['user_id'])) {
                     <div class="card card-primary card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
+
                                 <?php echo '<img class="profile-user-img img-fluid img-circle"
                                             src="' . $row['userimage'] . '"
-                                            alt="User profile picture">'; ?>
+                                            alt="User profile picture"
+                                            style="width: 100px; height: 100px; border-radius: 50%;">'; ?>
 
                             </div>
                             <h3 class="profile-username text-center">
@@ -52,8 +72,7 @@ if (isset($_GET['user_id'])) {
 
                                     <p><strong><i class="fas fa-id-badge"></i> User ID:</strong>
                                         <?php echo $row['id']; ?></p>
-                                    <p><strong><i class="fas fa-user"></i> Name:</strong>
-                                        <?php echo $row['firstname'] . ' ' . $row['lastname']; ?></p>
+
                                     <p><strong><i class="fas fa-map-marker-alt"></i> Address:</strong>
                                         <?php echo $row['address']; ?></p>
                                     <p><strong><i class="fas fa-city"></i> City:</strong> <?php echo $row['city']; ?>
@@ -63,7 +82,7 @@ if (isset($_GET['user_id'])) {
                                     <p><strong><i class="fas fa-venus-mars"></i> Gender:</strong>
                                         <?php echo $row['gender']; ?>
                                     </p>
-                                    
+
                                 </div>
                             </div>
                         </div>

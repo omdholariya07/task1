@@ -38,8 +38,7 @@ include('config/dbcon.php');
                             <h3 class="card-title">Create User</h3>
                         </div>
                         <form action="code.php" method="POST" id="quickForm" enctype="multipart/form-data">
-                            <div class="modal-body">
-                                <div class="modal-body">
+                                <div class="card-body">
                                     <div class="form-group">
                                         <label for="">first name*</label>
                                         <input type="text" name="firstname" class="form-control"
@@ -103,6 +102,7 @@ include('config/dbcon.php');
                                         <input type="radio" name="gender" value="female" required> Female
                                     </div>
 
+
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -121,7 +121,7 @@ include('config/dbcon.php');
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="">User Image</label>
+                                        <label for="">User Image*</label>
                                         <div class="input-group">
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" name="userimage"
@@ -208,6 +208,10 @@ $('#quickForm').validate({
         Dob: {
             required: true,
         },
+        userimage: {
+                required: true,
+                accept: "image/*"
+            }
     },
     messages: {
         firstname: {
@@ -243,6 +247,10 @@ $('#quickForm').validate({
         Dob: {
             required: "Please enter your date of birth"
         },
+        userimage: {
+                required: "Please select an image file",
+                accept: "Only image files are allowed"
+            }
     },
     errorElement: 'span',
     errorPlacement: function(error, element) {
@@ -255,6 +263,7 @@ $('#quickForm').validate({
     unhighlight: function(element, errorClass, validClass) {
         $(element).removeClass('is-invalid');
     }
+
 });
 </script>
 
