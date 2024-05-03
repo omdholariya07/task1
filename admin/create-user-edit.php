@@ -110,7 +110,7 @@ include('config/dbcon.php');
 
 
                                         <div class="form-group">
-                                            <label for="country">Country</label>
+                                            <label for="country">Country*</label>
                                             <select id="country" name="country" class="form-control" required>
                                                 <?php
                                                 $countries = array("USA", "India", "UK", "Australia", "Germany");
@@ -145,7 +145,9 @@ include('config/dbcon.php');
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" name="userimage"
                                                         id="userImageInput">
-                                                    <label class="custom-file-label" for="">Choose file</label>
+                                                    <label class="custom-file-label"
+                                                        for=""
+                                                        data-current-file="<?php echo $row['userimage']; ?>">Choose file</label>
                                                 </div>
                                                 <div class="input-group-append">
                                                     <span class="input-group-text">Upload</span>
@@ -205,9 +207,22 @@ include('config/dbcon.php');
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 
+    // Function to update the label of the file input
+    function updateFileInputLabel(fileName) {
+        document.querySelector('.custom-file-label').textContent = fileName;
+    }
+
+    // Get the current file name when the page loads
+    var currentFilePath = document.querySelector('.custom-file-label').getAttribute('data-current-file');
+    var currentFileName = currentFilePath.split('/').pop(); // Extracting only the file name
+
+    // Update the label with the current file name
+    updateFileInputLabel(currentFileName);
+
+    // Update the label when a new file is selected
     document.getElementById('userImageInput').addEventListener('change', function() {
         var fileName = this.value.split('\\').pop();
-        document.querySelector('.custom-file-label').textContent = fileName;
+        updateFileInputLabel(fileName);
     });
 });
 </script>

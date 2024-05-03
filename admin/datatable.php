@@ -92,7 +92,6 @@ include('config/dbcon.php');
                                                     <i class="fas fa-eye"></i> View
                                                 </a>
 
-
                                           <a href="create-user-edit.php?user_id=<?php echo $row['id']; ?>"
                                               class="btn btn-info btn-sm">
                                               <i class="fas fa-pencil-alt"></i> Edit
